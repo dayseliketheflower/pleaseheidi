@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Heidi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-primary: #e06651;
+      --color-primary-dark: #cc4a37;
+      --color-bg: #fdf4f3;
+      --color-surface: #ffffff;
+      --color-text: #1f2937;
+      --color-text-muted: #6b7280;
+      --color-border: #e5e7eb;
+      --color-success: #10b981;
+      --color-warning: #f59e0b;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: var(--color-surface); box-shadow: 0 1px 12px rgba(0,0,0,0.07); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--color-primary); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; flex-shrink: 0; }
+    .logo svg { width: 28px; height: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--color-text); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--color-primary); }
+    .btn-nav { background: var(--color-primary); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-weight: 600; transition: background 0.2s !important; white-space: nowrap; }
+    .btn-nav:hover { background: var(--color-primary-dark) !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--color-surface); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+    }
+
+    .page-hero { background: linear-gradient(135deg, #fdf4f3, #fde8e4); padding: 56px 24px 60px; }
+    .page-hero-inner { max-width: 740px; margin: 0 auto; }
+    .page-label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; font-weight: 600; color: var(--color-primary); margin-bottom: 12px; }
+    .page-hero h1 { font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--color-text); margin-bottom: 12px; }
+    .page-hero .meta { color: var(--color-text-muted); font-size: 0.9rem; }
+
+    .legal-wrap { max-width: 740px; margin: 0 auto; padding: 56px 24px 80px; }
+    .legal-toc { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 24px 28px; margin-bottom: 48px; }
+    .legal-toc h3 { font-weight: 600; font-size: 0.95rem; color: var(--color-text); margin-bottom: 14px; }
+    .legal-toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+    .legal-toc li { font-size: 0.88rem; }
+    .legal-toc a { color: var(--color-primary); text-decoration: none; }
+    .legal-toc a:hover { text-decoration: underline; }
+
+    .legal-section { margin-bottom: 44px; scroll-margin-top: 88px; }
+    .legal-section h2 { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: var(--color-text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--color-border); }
+    .legal-section p { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.72; margin-bottom: 12px; }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul, .legal-section ol { padding-left: 22px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .legal-section li { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; }
+    .legal-section a { color: var(--color-primary); }
+
+    .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.9rem; }
+    .data-table th { background: var(--color-bg); text-align: left; padding: 10px 14px; font-weight: 600; color: var(--color-text); border: 1px solid var(--color-border); }
+    .data-table td { padding: 10px 14px; color: var(--color-text-muted); border: 1px solid var(--color-border); line-height: 1.5; }
+
+    .rights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 16px; }
+    .right-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: 16px; }
+    .right-card h4 { font-weight: 600; font-size: 0.88rem; color: var(--color-text); margin-bottom: 6px; }
+    .right-card p { font-size: 0.82rem; color: var(--color-text-muted); margin: 0; line-height: 1.5; }
+
+    footer { background: var(--color-text); color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand .logo { color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.55); max-width: 260px; line-height: 1.6; }
+    .footer-links h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .footer-disclaimer { background: rgba(224,102,81,0.15); border: 1px solid rgba(224,102,81,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">
+      <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/></svg>
+      Heidi
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="#1f2937"/><rect y="10" width="22" height="2" rx="1" fill="#1f2937"/><rect y="16" width="22" height="2" rx="1" fill="#1f2937"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../index.html#how-it-works">How It Works</a></li>
+      <li><a href="../safety.html">Safety</a></li>
+      <li><a href="../index.html#provider-form">For Providers</a></li>
+      <li><a href="../index.html#waitlist" class="btn-nav">Join the Waitlist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-label">Legal</p>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last Updated: March 2025 &nbsp;·&nbsp; <a href="mailto:privacy@pleaseheidi.com" style="color:var(--color-primary);">privacy@pleaseheidi.com</a></p>
+  </div>
+</div>
+
+<div class="legal-wrap">
+
+  <div class="legal-toc">
+    <h3>On this page</h3>
+    <ol>
+      <li><a href="#what-we-collect">What We Collect</a></li>
+      <li><a href="#how-we-use">How We Use It</a></li>
+      <li><a href="#who-we-share">Who We Share It With</a></li>
+      <li><a href="#retention">Data Retention</a></li>
+      <li><a href="#your-rights">Your Rights</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#cookies">Cookies</a></li>
+      <li><a href="#children">Children</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="legal-section" id="what-we-collect">
+    <h2>1. What We Collect</h2>
+    <p>We collect information you provide directly when you sign up, verify your identity, or use the platform — as well as certain information generated automatically when you use our services.</p>
+    <table class="data-table">
+      <thead>
+        <tr><th>Category</th><th>Examples</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Account information</td><td>Name, email address, phone number, city</td></tr>
+        <tr><td>Identity verification</td><td>Government-issued ID (processed by our third-party partner)</td></tr>
+        <tr><td>Provider application data</td><td>Age, gender identity, sexual orientation (optional), motivation statement, services offered</td></tr>
+        <tr><td>Session data</td><td>Booking history, session timing, location type (public/private), ratings and reviews</td></tr>
+        <tr><td>Communications</td><td>In-app messages, support emails, report submissions</td></tr>
+        <tr><td>Usage data</td><td>Pages visited, device type, browser, IP address, referral source</td></tr>
+      </tbody>
+    </table>
+    <p>We do not collect financial account details directly — payment processing is handled by our secure third-party payment provider.</p>
+  </div>
+
+  <div class="legal-section" id="how-we-use">
+    <h2>2. How We Use It</h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Verify your identity and run background screening (providers)</li>
+      <li>Facilitate bookings and session management between clients and providers</li>
+      <li>Send confirmation emails, platform updates, and safety notifications</li>
+      <li>Monitor the platform for violations of our Terms of Use and Code of Conduct</li>
+      <li>Improve our product and resolve technical issues</li>
+      <li>Comply with legal obligations and respond to law enforcement requests where required</li>
+    </ul>
+    <p>We do not use your personal information for advertising, profiling, or sale to third parties. We do not build advertising profiles based on your usage of Heidi.</p>
+  </div>
+
+  <div class="legal-section" id="who-we-share">
+    <h2>3. Who We Share It With</h2>
+    <p>We share your data only in limited circumstances:</p>
+    <ul>
+      <li><strong>Identity &amp; background check partners:</strong> To complete required verification for providers. These partners handle data under strict confidentiality agreements and applicable law.</li>
+      <li><strong>Payment processors:</strong> To complete transactions securely. We do not store full payment card information.</li>
+      <li><strong>Infrastructure providers:</strong> Cloud hosting and data storage (e.g., AWS). These providers do not have permission to use your data for any purpose other than providing services to Heidi.</li>
+      <li><strong>Law enforcement:</strong> When legally required by valid subpoena, court order, or to prevent imminent harm.</li>
+    </ul>
+    <p><strong>We do not sell your data. We do not share your data with advertisers. We do not use third-party advertising on Heidi.</strong></p>
+  </div>
+
+  <div class="legal-section" id="retention">
+    <h2>4. Data Retention</h2>
+    <p>We retain your account data for as long as your account is active. If you close your account, we delete or anonymize personal data within 90 days, except where we are legally required to retain it (for example, records related to background check compliance, payment transactions, or safety incidents).</p>
+    <p>Identity documents submitted for verification are handled by our third-party partner and are typically deleted from their systems within 30 days of the verification decision. We do not retain copies of government-issued IDs on Heidi servers.</p>
+    <p>Session data (booking records, ratings) may be retained for up to 3 years for platform safety and dispute resolution purposes.</p>
+  </div>
+
+  <div class="legal-section" id="your-rights">
+    <h2>5. Your Rights (GDPR / CCPA)</h2>
+    <p>Depending on where you live, you may have the following rights regarding your personal data:</p>
+    <div class="rights-grid">
+      <div class="right-card"><h4>Access</h4><p>Request a copy of the personal data we hold about you.</p></div>
+      <div class="right-card"><h4>Correction</h4><p>Request correction of inaccurate or incomplete data.</p></div>
+      <div class="right-card"><h4>Deletion</h4><p>Request deletion of your personal data, subject to legal retention requirements.</p></div>
+      <div class="right-card"><h4>Portability</h4><p>Receive your data in a structured, machine-readable format.</p></div>
+      <div class="right-card"><h4>Objection</h4><p>Object to certain processing of your data.</p></div>
+      <div class="right-card"><h4>No Sale</h4><p>California residents: we do not sell your personal information.</p></div>
+    </div>
+    <p style="margin-top:16px;">To exercise any of these rights, email <a href="mailto:privacy@pleaseheidi.com">privacy@pleaseheidi.com</a>. We will respond within 30 days.</p>
+  </div>
+
+  <div class="legal-section" id="security">
+    <h2>6. Security</h2>
+    <p>We take the security of your data seriously. Measures we use include:</p>
+    <ul>
+      <li>Encryption in transit (TLS/HTTPS) for all data exchanged with our platform</li>
+      <li>Encryption at rest for sensitive data fields</li>
+      <li>Access controls — only team members who need your data to perform their role can access it</li>
+      <li>Regular security reviews and vulnerability assessments</li>
+    </ul>
+    <p>No system is perfectly secure. If you have reason to believe your data has been compromised, please contact us immediately at <a href="mailto:privacy@pleaseheidi.com">privacy@pleaseheidi.com</a>.</p>
+  </div>
+
+  <div class="legal-section" id="cookies">
+    <h2>7. Cookies</h2>
+    <p>Heidi uses a minimal set of cookies necessary for the platform to function — for example, to keep you logged in and remember your preferences. We do not use advertising cookies, tracking pixels, or third-party analytics that profile you across the web.</p>
+    <p>You can configure your browser to refuse cookies, though doing so may affect your ability to use certain features of the platform.</p>
+  </div>
+
+  <div class="legal-section" id="children">
+    <h2>8. Children</h2>
+    <p>Heidi is strictly for adults aged 18 and older. We do not knowingly collect personal information from anyone under 18. If we discover that a user is under 18, we will immediately terminate their account and delete any associated data. If you believe a minor has registered, please contact us at <a href="mailto:safety@pleaseheidi.com">safety@pleaseheidi.com</a>.</p>
+  </div>
+
+  <div class="legal-section" id="contact">
+    <h2>9. Contact</h2>
+    <p>For privacy-related inquiries, data requests, or concerns, contact us at:</p>
+    <p><a href="mailto:privacy@pleaseheidi.com">privacy@pleaseheidi.com</a></p>
+    <p>We aim to respond to all privacy requests within 30 days.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html">
+          <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/></svg>
+          Heidi
+        </a>
+        <p>Vetted, compassionate companionship for the moments when you need a human presence, not a prescription.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html#how-it-works">How It Works</a></li>
+          <li><a href="../safety.html">Safety</a></li>
+          <li><a href="terms.html" target="_blank" rel="noopener">Terms of Use</a></li>
+          <li><a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></li>
+          <li><a href="conduct.html" target="_blank" rel="noopener">Code of Conduct</a></li>
+          <li><a href="mailto:hello@pleaseheidi.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">Not therapy. Not dating. Not sexual services. Heidi provides peer-style emotional support and companionship only.</div>
+      <p class="footer-copy">© 2025 Heidi. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

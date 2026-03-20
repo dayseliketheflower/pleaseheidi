@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Use — Heidi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-primary: #e06651;
+      --color-primary-dark: #cc4a37;
+      --color-bg: #fdf4f3;
+      --color-surface: #ffffff;
+      --color-text: #1f2937;
+      --color-text-muted: #6b7280;
+      --color-border: #e5e7eb;
+      --color-success: #10b981;
+      --color-warning: #f59e0b;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: var(--color-surface); box-shadow: 0 1px 12px rgba(0,0,0,0.07); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--color-primary); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; flex-shrink: 0; }
+    .logo svg { width: 28px; height: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--color-text); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--color-primary); }
+    .btn-nav { background: var(--color-primary); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-weight: 600; transition: background 0.2s !important; white-space: nowrap; }
+    .btn-nav:hover { background: var(--color-primary-dark) !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--color-surface); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+    }
+
+    .page-hero { background: linear-gradient(135deg, #fdf4f3, #fde8e4); padding: 56px 24px 60px; }
+    .page-hero-inner { max-width: 740px; margin: 0 auto; }
+    .page-label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; font-weight: 600; color: var(--color-primary); margin-bottom: 12px; }
+    .page-hero h1 { font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--color-text); margin-bottom: 12px; }
+    .page-hero .meta { color: var(--color-text-muted); font-size: 0.9rem; }
+
+    .legal-wrap { max-width: 740px; margin: 0 auto; padding: 56px 24px 80px; }
+    .legal-toc { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 14px; padding: 24px 28px; margin-bottom: 48px; }
+    .legal-toc h3 { font-weight: 600; font-size: 0.95rem; color: var(--color-text); margin-bottom: 14px; }
+    .legal-toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+    .legal-toc li { font-size: 0.88rem; }
+    .legal-toc a { color: var(--color-primary); text-decoration: none; }
+    .legal-toc a:hover { text-decoration: underline; }
+
+    .legal-section { margin-bottom: 44px; scroll-margin-top: 88px; }
+    .legal-section h2 { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: var(--color-text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--color-border); }
+    .legal-section p { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.72; margin-bottom: 12px; }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul, .legal-section ol { padding-left: 22px; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+    .legal-section li { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; }
+    .legal-section a { color: var(--color-primary); }
+
+    .highlight-box { background: #fff7ed; border: 1px solid #fcd34d; border-left: 4px solid var(--color-warning); border-radius: 10px; padding: 20px 20px; margin: 16px 0; }
+    .highlight-box p { color: var(--color-text) !important; font-weight: 500; }
+
+    footer { background: var(--color-text); color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand .logo { color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.55); max-width: 260px; line-height: 1.6; }
+    .footer-links h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .footer-disclaimer { background: rgba(224,102,81,0.15); border: 1px solid rgba(224,102,81,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">
+      <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/></svg>
+      Heidi
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="#1f2937"/><rect y="10" width="22" height="2" rx="1" fill="#1f2937"/><rect y="16" width="22" height="2" rx="1" fill="#1f2937"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../index.html#how-it-works">How It Works</a></li>
+      <li><a href="../safety.html">Safety</a></li>
+      <li><a href="../index.html#provider-form">For Providers</a></li>
+      <li><a href="../index.html#waitlist" class="btn-nav">Join the Waitlist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-label">Legal</p>
+    <h1>Terms of Use</h1>
+    <p class="meta">Last Updated: March 2025 &nbsp;·&nbsp; <a href="mailto:legal@pleaseheidi.com" style="color:var(--color-primary);">legal@pleaseheidi.com</a></p>
+  </div>
+</div>
+
+<div class="legal-wrap">
+
+  <div class="legal-toc">
+    <h3>On this page</h3>
+    <ol>
+      <li><a href="#what-heidi-is">What Heidi Is</a></li>
+      <li><a href="#who-can-use">Who Can Use Heidi</a></li>
+      <li><a href="#non-sexual">Strictly Non-Sexual Services</a></li>
+      <li><a href="#responsibilities">User Responsibilities</a></li>
+      <li><a href="#booking">Booking &amp; Cancellation</a></li>
+      <li><a href="#payments">Payments &amp; Refunds</a></li>
+      <li><a href="#privacy">Privacy &amp; Data</a></li>
+      <li><a href="#reporting">Reporting Violations</a></li>
+      <li><a href="#termination">Termination</a></li>
+      <li><a href="#liability">Limitation of Liability</a></li>
+      <li><a href="#law">Governing Law</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="legal-section" id="what-heidi-is">
+    <h2>1. What Heidi Is</h2>
+    <p>Heidi (operated at pleaseheidi.com) is a platform that connects clients with vetted support providers for non-clinical, non-sexual companionship and peer-style emotional support. This includes services like appointment accompaniment, listening sessions, public companionship, and platonic physical comfort (such as hand-holding or being held), always within clearly defined and mutually agreed boundaries.</p>
+    <p>Heidi is not a therapy service, a medical service, an escort service, a dating platform, or a sexual services marketplace. Nothing that happens on or through Heidi should be interpreted as mental health treatment, medical advice, or professional counseling.</p>
+  </div>
+
+  <div class="legal-section" id="who-can-use">
+    <h2>2. Who Can Use Heidi</h2>
+    <p>To use Heidi as either a client or a provider, you must:</p>
+    <ul>
+      <li>Be at least 18 years old</li>
+      <li>Complete identity verification as required by the platform</li>
+      <li>Reside in a geographic area where Heidi is currently available</li>
+      <li>Agree to these Terms in full</li>
+    </ul>
+    <p>Providers must additionally be at least 21 years old and successfully complete the full vetting process, including background screening and provider orientation, before offering any services.</p>
+    <p>Geographic availability is limited and subject to change. Heidi makes no guarantee that services will be available in your area at any given time.</p>
+  </div>
+
+  <div class="legal-section" id="non-sexual">
+    <h2>3. Strictly Non-Sexual Services</h2>
+    <div class="highlight-box">
+      <p>All services facilitated through Heidi are strictly and unambiguously non-sexual. Any behavior, communication, or request of a sexual nature — from either a client or a provider — is a violation of these Terms and will result in immediate and permanent removal from the platform.</p>
+    </div>
+    <p>This includes but is not limited to: solicitation of sexual services, sexual communication during or outside of sessions, and any physical contact of a sexual nature. Violations may also be reported to relevant authorities where legally required.</p>
+    <p>Providers explicitly agree, as a condition of participation, that they will not offer, perform, or accept compensation for any sexual services. Clients explicitly agree that they will not request, solicit, or attempt to negotiate any sexual services through the platform.</p>
+  </div>
+
+  <div class="legal-section" id="responsibilities">
+    <h2>4. User Responsibilities</h2>
+    <p>By using Heidi, you agree to:</p>
+    <ul>
+      <li>Provide accurate, truthful information during registration and verification</li>
+      <li>Treat all other users with dignity and respect</li>
+      <li>Honor session agreements and boundary frameworks established before each meeting</li>
+      <li>Report any violations or concerns to Heidi promptly via the in-app report function or at safety@pleaseheidi.com</li>
+      <li>Not use the platform for any unlawful purpose</li>
+      <li>Not attempt to circumvent the platform by arranging services outside of Heidi's booking system</li>
+    </ul>
+  </div>
+
+  <div class="legal-section" id="booking">
+    <h2>5. Booking &amp; Cancellation</h2>
+    <p>Booking and cancellation policies are established at the platform level and are subject to change. Specific terms — including notice periods, fees for late cancellations, and provider-set policies — will be displayed at the time of booking.</p>
+    <p><em>Full booking and cancellation details will be published when Heidi launches in your area. This section will be updated accordingly.</em></p>
+  </div>
+
+  <div class="legal-section" id="payments">
+    <h2>6. Payments &amp; Refunds</h2>
+    <p>All payments are processed through Heidi's secure payment system. Providers set their own rates within platform guidelines. Heidi collects a service fee on each transaction.</p>
+    <p>Refund eligibility depends on cancellation timing and the circumstances of any dispute. Heidi reserves the right to issue refunds at its discretion in cases of verified misconduct or platform error.</p>
+    <p><em>Full payment and refund terms will be published at launch. This section will be updated accordingly.</em></p>
+  </div>
+
+  <div class="legal-section" id="privacy">
+    <h2>7. Privacy &amp; Data</h2>
+    <p>Your privacy matters to us. How we collect, use, and protect your data is described in detail in our <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>, which is incorporated into these Terms by reference.</p>
+    <p>We do not sell your data. We do not use your data for advertising. Identity documents submitted for verification are handled by our secure third-party partner and are not stored permanently on Heidi servers.</p>
+  </div>
+
+  <div class="legal-section" id="reporting">
+    <h2>8. Reporting Violations</h2>
+    <p>If you experience or witness a violation of these Terms — including any sexual conduct, harassment, or safety concern — please report it immediately:</p>
+    <ul>
+      <li>Use the in-app report button during any active session</li>
+      <li>Email <a href="mailto:safety@pleaseheidi.com">safety@pleaseheidi.com</a> at any time</li>
+      <li>Anonymous reporting is available — you do not need an account to file a report</li>
+    </ul>
+    <p>All reports are reviewed within 24 hours. Heidi takes every report seriously and will investigate promptly.</p>
+  </div>
+
+  <div class="legal-section" id="termination">
+    <h2>9. Termination</h2>
+    <p>Heidi reserves the right to suspend or permanently remove any user — client or provider — who violates these Terms, with or without prior notice. Violations of the non-sexual conduct policy result in immediate and permanent termination with no right of appeal.</p>
+    <p>You may also close your account at any time by contacting <a href="mailto:hello@pleaseheidi.com">hello@pleaseheidi.com</a>. Account closure does not delete data we are legally required to retain.</p>
+  </div>
+
+  <div class="legal-section" id="liability">
+    <h2>10. Limitation of Liability</h2>
+    <p>Heidi is a platform connecting independent parties. We do not employ providers, and sessions represent independent contracted services between consenting adults. Heidi is not responsible for the conduct of individual providers or clients during or outside of sessions.</p>
+    <p>To the maximum extent permitted by applicable law, Heidi's liability is limited to the amount you paid for the specific session or service giving rise to the claim. Heidi is not liable for indirect, incidental, consequential, or punitive damages.</p>
+    <p>Nothing in this section limits Heidi's obligations with respect to user safety reporting or our responsibility to conduct thorough provider vetting as described in our Safety documentation.</p>
+  </div>
+
+  <div class="legal-section" id="law">
+    <h2>11. Governing Law</h2>
+    <p>These Terms are governed by the laws of the jurisdiction in which Heidi is incorporated. Specific governing law and dispute resolution terms will be published at launch.</p>
+    <p><em>This section will be updated with the applicable jurisdiction and arbitration terms prior to platform launch.</em></p>
+  </div>
+
+  <div class="legal-section" id="contact">
+    <h2>12. Contact</h2>
+    <p>For legal inquiries, please contact: <a href="mailto:legal@pleaseheidi.com">legal@pleaseheidi.com</a></p>
+    <p>For safety concerns: <a href="mailto:safety@pleaseheidi.com">safety@pleaseheidi.com</a></p>
+    <p>For general questions: <a href="mailto:hello@pleaseheidi.com">hello@pleaseheidi.com</a></p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html">
+          <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/></svg>
+          Heidi
+        </a>
+        <p>Vetted, compassionate companionship for the moments when you need a human presence, not a prescription.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html#how-it-works">How It Works</a></li>
+          <li><a href="../safety.html">Safety</a></li>
+          <li><a href="terms.html" target="_blank" rel="noopener">Terms of Use</a></li>
+          <li><a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></li>
+          <li><a href="conduct.html" target="_blank" rel="noopener">Code of Conduct</a></li>
+          <li><a href="mailto:hello@pleaseheidi.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">Not therapy. Not dating. Not sexual services. Heidi provides peer-style emotional support and companionship only.</div>
+      <p class="footer-copy">© 2025 Heidi. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

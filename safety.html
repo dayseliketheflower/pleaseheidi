@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Safety — Heidi</title>
+  <meta name="description" content="Every person on Heidi has been verified. Every session is protected by clear consent frameworks and a platform that takes violations seriously.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-primary: #e06651;
+      --color-primary-dark: #cc4a37;
+      --color-bg: #fdf4f3;
+      --color-surface: #ffffff;
+      --color-text: #1f2937;
+      --color-text-muted: #6b7280;
+      --color-border: #e5e7eb;
+      --color-success: #10b981;
+      --color-warning: #f59e0b;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--color-surface); box-shadow: 0 1px 12px rgba(0,0,0,0.07); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--color-primary); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; flex-shrink: 0; }
+    .logo svg { width: 28px; height: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--color-text); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--color-primary); }
+    .btn-nav { background: var(--color-primary); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-weight: 600; transition: background 0.2s !important; white-space: nowrap; }
+    .btn-nav:hover { background: var(--color-primary-dark) !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--color-surface); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+    }
+
+    /* ── HERO ── */
+    .hero { background: var(--color-text); padding: 72px 24px 80px; text-align: center; }
+    .hero-inner { max-width: 740px; margin: 0 auto; }
+    .hero-label { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; font-weight: 600; color: #f9a899; margin-bottom: 16px; }
+    .hero h1 { font-family: var(--font-heading); font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 20px; }
+    .hero p { color: rgba(255,255,255,0.72); font-size: 1.08rem; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+    /* ── CONTENT ── */
+    .content-wrap { max-width: 900px; margin: 0 auto; padding: 72px 24px; }
+
+    /* ── TIMELINE ── */
+    .timeline-section { margin-bottom: 64px; }
+    .section-title { font-family: var(--font-heading); font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--color-text); margin-bottom: 10px; }
+    .section-sub { color: var(--color-text-muted); font-size: 1rem; margin-bottom: 40px; line-height: 1.65; }
+
+    .timeline { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 56px; }
+    .timeline::before { content: ''; position: absolute; left: 20px; top: 24px; bottom: 24px; width: 2px; background: linear-gradient(to bottom, var(--color-primary), rgba(224,102,81,0.15)); }
+    .timeline-item { position: relative; padding: 0 0 32px 28px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .t-number { position: absolute; left: -56px; width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; z-index: 1; }
+    .timeline-item h3 { font-weight: 600; font-size: 1.05rem; color: var(--color-text); margin-bottom: 6px; }
+    .timeline-item p { color: var(--color-text-muted); font-size: 0.93rem; line-height: 1.6; }
+
+    /* ── CONTENT SECTIONS ── */
+    .safety-block { margin-bottom: 56px; }
+    .safety-block h2 { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-text); margin-bottom: 20px; }
+
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .bullet-list li { display: flex; gap: 12px; color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.55; }
+    .bullet-list li::before { content: '→'; color: var(--color-primary); font-weight: 700; flex-shrink: 0; }
+
+    /* ── TWO-COL ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 56px; }
+    @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+    .two-col-card { background: var(--color-surface); border-radius: 16px; padding: 28px 24px; border: 1px solid var(--color-border); }
+    .two-col-card h3 { font-weight: 700; font-size: 1rem; color: var(--color-text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+
+    /* ── CALLOUT ── */
+    .callout-box { background: #fff7ed; border: 1px solid #fcd34d; border-left: 4px solid var(--color-warning); border-radius: 12px; padding: 28px 24px; margin-bottom: 56px; }
+    .callout-box h3 { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; color: var(--color-text); margin-bottom: 12px; }
+    .callout-box p { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.65; }
+
+    /* ── REPORT CTA ── */
+    .report-cta { background: var(--color-primary); border-radius: 16px; padding: 36px 32px; text-align: center; color: #fff; margin-bottom: 0; }
+    .report-cta h3 { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+    .report-cta p { color: rgba(255,255,255,0.8); margin-bottom: 20px; }
+    .report-cta a { background: #fff; color: var(--color-primary); padding: 12px 28px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: transform 0.15s; }
+    .report-cta a:hover { transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--color-text); color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand .logo { color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.55); max-width: 260px; line-height: 1.6; }
+    .footer-links h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .footer-disclaimer { background: rgba(224,102,81,0.15); border: 1px solid rgba(224,102,81,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/>
+      </svg>
+      Heidi
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="#1f2937"/><rect y="10" width="22" height="2" rx="1" fill="#1f2937"/><rect y="16" width="22" height="2" rx="1" fill="#1f2937"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="safety.html">Safety</a></li>
+      <li><a href="index.html#provider-form">For Providers</a></li>
+      <li><a href="index.html#waitlist" class="btn-nav">Join the Waitlist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-label">Safety</p>
+    <h1>Safety isn't a feature. It's the foundation.</h1>
+    <p>Every person on Heidi — client or provider — has been verified. Every session is protected by clear consent frameworks and a platform that takes violations seriously.</p>
+  </div>
+</section>
+
+<!-- ── CONTENT ── -->
+<div class="content-wrap">
+
+  <!-- Provider Vetting -->
+  <div class="timeline-section">
+    <h2 class="section-title">Provider Vetting Process</h2>
+    <p class="section-sub">Before any provider can accept a session, they complete a rigorous multi-step verification process. There are no shortcuts, no exceptions.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="t-number">1</div>
+        <h3>Government ID Verification</h3>
+        <p>Every provider submits a valid government-issued ID through our secure third-party verification partner. Name, photo, and identity are confirmed before any application moves forward.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="t-number">2</div>
+        <h3>Criminal History Screening — All 50 States</h3>
+        <p>A comprehensive criminal background check is run across all 50 states. Any felony convictions disqualify an applicant immediately. Heidi covers the cost of this check for all providers.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="t-number">3</div>
+        <h3>Sex Offender Registry Check — Mandatory, No Exceptions</h3>
+        <p>Every provider is screened against the national sex offender registry before they are approved. A match results in immediate and permanent disqualification — no appeals, no exceptions.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="t-number">4</div>
+        <h3>Ongoing Monitoring</h3>
+        <p>Where legally permitted, we conduct periodic re-screening to ensure provider records remain clear throughout their time on the platform. Safety is not a one-time box to check.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="t-number">5</div>
+        <h3>Provider Orientation (~2 hours, self-paced)</h3>
+        <p>Before going live, every provider completes our orientation training covering: consent frameworks, boundary-setting, session best practices, reporting procedures, and platform rules. Completion is required — not optional.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Session Safety Framework -->
+  <div class="safety-block">
+    <h2>Session Safety Framework</h2>
+    <ul class="bullet-list">
+      <li>First sessions always take place in public locations or professional settings during business hours</li>
+      <li>Private sessions only available after mutual positive session history and explicit consent from both parties</li>
+      <li>Session-specific boundary agreements signed before every meeting — expectations are documented, not assumed</li>
+      <li>Optional pre-session video call available to establish comfort before meeting in person</li>
+      <li>In-app secure messaging monitored for boundary violations and inappropriate requests</li>
+      <li>Panic/report button accessible during every active session for immediate escalation</li>
+    </ul>
+  </div>
+
+  <!-- For Clients + Providers -->
+  <div class="two-col">
+    <div class="two-col-card">
+      <h3><span>🧡</span> For Clients</h3>
+      <ul class="bullet-list">
+        <li>Identity verification required before booking any session</li>
+        <li>Fraud and risk screening to protect providers and the platform</li>
+        <li>Provider ratings and reviews visible to all clients</li>
+        <li>Anonymous reporting available 24/7 — no account required to file a report</li>
+      </ul>
+    </div>
+    <div class="two-col-card">
+      <h3><span>🛡️</span> For Providers</h3>
+      <ul class="bullet-list">
+        <li>Clear platform rules protect you — not just clients</li>
+        <li>You may decline any session for any reason, at any time</li>
+        <li>Support team available if a client behaves inappropriately</li>
+        <li>Documented incident workflow and dispute resolution process available to all providers</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- What Heidi Is Not -->
+  <div class="callout-box">
+    <h3>What Heidi Is Not</h3>
+    <p>Heidi is not a therapy service, escort service, dating platform, or sexual services marketplace. All services are strictly non-sexual. Any provider or client who violates this is immediately and permanently removed from the platform — with no recourse for reinstatement.</p>
+  </div>
+
+  <!-- Report CTA -->
+  <div class="report-cta">
+    <h3>Have a concern? We want to hear from you.</h3>
+    <p>Reports are reviewed within 24 hours. You don't need to be a registered user to report a concern.</p>
+    <a href="mailto:safety@pleaseheidi.com">→ Report a concern</a>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">
+          <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/></svg>
+          Heidi
+        </a>
+        <p>Vetted, compassionate companionship for the moments when you need a human presence, not a prescription.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="safety.html">Safety</a></li>
+          <li><a href="legal/terms.html" target="_blank" rel="noopener">Terms of Use</a></li>
+          <li><a href="legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a></li>
+          <li><a href="legal/conduct.html" target="_blank" rel="noopener">Code of Conduct</a></li>
+          <li><a href="mailto:hello@pleaseheidi.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">Not therapy. Not dating. Not sexual services. Heidi provides peer-style emotional support and companionship only.</div>
+      <p class="footer-copy">© 2025 Heidi. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
