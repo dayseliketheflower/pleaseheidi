@@ -11,15 +11,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --color-primary: #e06651;
-      --color-primary-dark: #cc4a37;
-      --color-bg: #fdf4f3;
-      --color-surface: #ffffff;
-      --color-text: #1f2937;
-      --color-text-muted: #6b7280;
-      --color-border: #e5e7eb;
+      --color-primary: #3D7A8A;
+      --color-primary-dark: #2C4A56;
+      --color-bg: #FAFCFC;
+      --color-surface: #EEF5F6;
+      --color-text: #1A2530;
+      --color-text-muted: #7FB5BF;
+      --color-border: #C8E0E4;
       --color-success: #10b981;
-      --color-warning: #f59e0b;
+      --color-warning: #D4A574;
+      --color-accent: #D4A574;
       --font-heading: 'Playfair Display', Georgia, serif;
       --font-body: 'DM Sans', system-ui, sans-serif;
     }
@@ -97,7 +98,7 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, #fdf4f3 0%, #fde8e4 100%);
+      background: linear-gradient(135deg, #FAFCFC 0%, #EEF5F6 100%);
       padding: 80px 24px 90px;
       text-align: center;
     }
@@ -170,7 +171,6 @@
       font-weight: 600;
       color: var(--color-text);
     }
-    .trust-item span:first-child { font-size: 1.3rem; }
 
     /* ── SECTION ── */
     .section { padding: 72px 24px; }
@@ -234,7 +234,7 @@
     .how-card p { color: var(--color-text-muted); font-size: 0.95rem; }
 
     /* ── SERVICES ── */
-    .services-section { background: linear-gradient(135deg, #fdf4f3, #fde8e4); }
+    .services-section { background: linear-gradient(135deg, #FAFCFC, #EEF5F6); }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -244,12 +244,12 @@
       background: var(--color-surface);
       border-radius: 14px;
       padding: 28px 24px;
-      border: 1px solid rgba(224, 102, 81, 0.15);
+      border: 1px solid rgba(61, 122, 138, 0.15);
       display: flex;
       gap: 16px;
       align-items: flex-start;
     }
-    .service-icon { font-size: 1.7rem; flex-shrink: 0; margin-top: 2px; }
+    .service-icon { flex-shrink: 0; margin-top: 2px; }
     .service-card h3 {
       font-weight: 600;
       font-size: 1rem;
@@ -259,10 +259,15 @@
     .service-card p { color: var(--color-text-muted); font-size: 0.88rem; line-height: 1.5; }
 
     /* ── SAFETY PREVIEW ── */
-    .safety-preview { background: var(--color-text); color: #fff; }
-    .safety-preview .section-label { color: #f9a899; }
-    .safety-preview .section-title { color: #fff; }
-    .safety-preview .section-sub { color: rgba(255,255,255,0.7); }
+    .safety-preview {
+      background: var(--color-bg);
+      color: var(--color-text);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .safety-preview .section-label { color: var(--color-primary); }
+    .safety-preview .section-title { color: var(--color-text); }
+    .safety-preview .section-sub { color: var(--color-text-muted); }
     .safety-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -270,17 +275,17 @@
       margin-bottom: 40px;
     }
     .safety-card {
-      background: rgba(255,255,255,0.08);
+      background: var(--color-surface);
       border-radius: 14px;
       padding: 28px 24px;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid var(--color-border);
+      border-top: 3px solid var(--color-primary);
     }
-    .safety-card .s-icon { font-size: 1.8rem; margin-bottom: 14px; }
-    .safety-card h3 { font-weight: 600; font-size: 1rem; margin-bottom: 8px; color: #fff; }
-    .safety-card p { color: rgba(255,255,255,0.65); font-size: 0.9rem; }
+    .safety-card h3 { font-weight: 600; font-size: 1rem; margin-bottom: 8px; color: var(--color-text); }
+    .safety-card p { color: var(--color-text-muted); font-size: 0.9rem; }
     .btn-light {
-      background: var(--color-surface);
-      color: var(--color-primary);
+      background: var(--color-primary);
+      color: #fff;
       padding: 13px 28px;
       border-radius: 50px;
       font-size: 0.95rem;
@@ -289,7 +294,7 @@
       display: inline-block;
       transition: all 0.2s;
     }
-    .btn-light:hover { background: var(--color-bg); transform: translateY(-1px); }
+    .btn-light:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
 
     /* ── FORMS ── */
     .forms-section { padding: 80px 24px; }
@@ -310,7 +315,7 @@
       border: 1px solid var(--color-border);
       box-shadow: 0 4px 24px rgba(0,0,0,0.06);
     }
-    .form-panel.provider-panel { border-top: 4px solid #6366f1; }
+    .form-panel.provider-panel { border-top: 4px solid var(--color-primary); }
     .form-panel.client-panel { border-top: 4px solid var(--color-primary); }
 
     .form-badge {
@@ -323,7 +328,7 @@
       letter-spacing: 0.08em;
       margin-bottom: 16px;
     }
-    .badge-client { background: #fde8e4; color: var(--color-primary); }
+    .badge-client { background: #EEF5F6; color: var(--color-primary); }
     .badge-provider { background: #ede9fe; color: #6366f1; }
 
     .form-panel h2 {
@@ -366,7 +371,7 @@
     }
     .field input:focus,
     .field select:focus,
-    .field textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(224,102,81,0.1); }
+    .field textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(61,122,138,0.1); }
     .field textarea { resize: vertical; min-height: 90px; }
     .field select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
     .field input.error, .field select.error, .field textarea.error { border-color: #ef4444; }
@@ -402,13 +407,12 @@
     }
     .btn-submit:hover:not(:disabled) { background: var(--color-primary-dark); transform: translateY(-1px); }
     .btn-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
-    .btn-submit.provider-btn { background: #6366f1; }
-    .btn-submit.provider-btn:hover:not(:disabled) { background: #4f46e5; }
+    .btn-submit.provider-btn { background: var(--color-primary); }
+    .btn-submit.provider-btn:hover:not(:disabled) { background: var(--color-primary-dark); }
 
     /* ── SUCCESS STATES ── */
     .success-state { display: none; text-align: center; padding: 16px 0; }
     .success-state.visible { display: block; }
-    .success-emoji { font-size: 2.8rem; margin-bottom: 16px; }
     .success-state h3 {
       font-family: var(--font-heading);
       font-size: 1.5rem;
@@ -459,7 +463,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: var(--color-text);
+      background: #1A2530;
       color: rgba(255,255,255,0.85);
       padding: 56px 24px 32px;
     }
@@ -488,8 +492,8 @@
       gap: 10px;
     }
     .footer-disclaimer {
-      background: rgba(224,102,81,0.15);
-      border: 1px solid rgba(224,102,81,0.3);
+      background: rgba(61,122,138,0.15);
+      border: 1px solid rgba(61,122,138,0.3);
       border-radius: 8px;
       padding: 12px 16px;
       font-size: 0.82rem;
@@ -510,7 +514,7 @@
   <div class="nav-inner">
     <a class="logo" href="index.html">
       <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/>
+        <path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#3D7A8A"/>
       </svg>
       Heidi
     </a>
@@ -545,9 +549,9 @@
 <!-- ── TRUST STRIP ── -->
 <div class="trust-strip">
   <div class="trust-inner">
-    <div class="trust-item"><span>🛡️</span><span>Background Checked</span></div>
-    <div class="trust-item"><span>✅</span><span>Identity Verified</span></div>
-    <div class="trust-item"><span>🤝</span><span>Non-Sexual Only</span></div>
+    <div class="trust-item"><span>Background Checked</span></div>
+    <div class="trust-item"><span>Identity Verified</span></div>
+    <div class="trust-item"><span>Non-Sexual Only</span></div>
   </div>
 </div>
 
@@ -585,35 +589,35 @@
     <p class="section-sub">Heidi is for the moments your therapist can't be there — and for needs that don't fit neatly into a clinical appointment.</p>
     <div class="services-grid">
       <div class="service-card">
-        <span class="service-icon">🏥</span>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
         <div>
           <h3>Medical &amp; Appointment Accompaniment</h3>
           <p>Someone to sit with you at a difficult appointment, drive you home, or just be present when you can't face it alone.</p>
         </div>
       </div>
       <div class="service-card">
-        <span class="service-icon">💙</span>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
         <div>
           <h3>Emotional Presence During Hard Times</h3>
           <p>A compassionate companion when you're grieving, overwhelmed, or just need someone to witness what you're going through.</p>
         </div>
       </div>
       <div class="service-card">
-        <span class="service-icon">☕</span>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
         <div>
           <h3>Public Companionship</h3>
           <p>Walks, errands, outings — a warm presence in everyday life for those moments when isolation creeps in.</p>
         </div>
       </div>
       <div class="service-card">
-        <span class="service-icon">🤲</span>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
         <div>
           <h3>Platonic Physical Comfort</h3>
           <p>Hand-holding, sitting close, being held — only ever if desired, always within clear, agreed boundaries.</p>
         </div>
       </div>
       <div class="service-card">
-        <span class="service-icon">🎧</span>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
         <div>
           <h3>Listening Sessions</h3>
           <p>No advice unless asked. No fixing. Just a real person giving you their full, undivided attention.</p>
@@ -631,17 +635,14 @@
     <p class="section-sub">Every person on Heidi has been verified. Every session is protected by clear consent frameworks — and a platform that takes violations seriously.</p>
     <div class="safety-cards">
       <div class="safety-card">
-        <div class="s-icon">🔍</div>
         <h3>Thorough Vetting</h3>
         <p>Every provider completes government ID verification, criminal history screening, and sex offender registry checks across all 50 states.</p>
       </div>
       <div class="safety-card">
-        <div class="s-icon">📋</div>
         <h3>Consent Frameworks</h3>
         <p>Session-specific boundary agreements before every meeting. Clear rules. Clear consequences. No exceptions.</p>
       </div>
       <div class="safety-card">
-        <div class="s-icon">🚨</div>
         <h3>Real-Time Protection</h3>
         <p>A report button during every active session, 24/7 support access, and zero tolerance for any violation of our non-sexual policy.</p>
       </div>
@@ -661,7 +662,6 @@
       <p class="form-subhead">We're launching in select cities first. Be the first to know when Heidi is available in your area.</p>
 
       <div class="success-state" id="client-success">
-        <div class="success-emoji">🌸</div>
         <h3>You're on the list, <span id="cs-name"></span>!</h3>
         <p>We're so glad you're here.</p>
         <p>Heidi is launching in select cities first, and you'll be among the first to know when we're live in <strong id="cs-city"></strong>.</p>
@@ -749,40 +749,34 @@
       <p class="form-subhead">Providers are thoroughly vetted and trained. This is a meaningful way to earn income while offering real human support — with clear boundaries and a strong safety framework backing you up.</p>
 
       <div class="success-state" id="provider-success">
-        <div class="success-emoji">📋</div>
         <h3>Application received — thanks, <span id="ps-name"></span>.</h3>
         <p>Here's exactly what to expect next:</p>
         <div class="provider-success-steps">
           <div class="p-step">
-            <span class="p-step-icon">✅</span>
             <div class="p-step-body">
               <h4>STEP 1 — Application Received (today)</h4>
               <p>You'll receive a confirmation email at <strong id="ps-email"></strong> with a summary of your application and resources.</p>
             </div>
           </div>
           <div class="p-step">
-            <span class="p-step-icon">🔍</span>
             <div class="p-step-body">
               <h4>STEP 2 — Identity Verification (within 48 hours)</h4>
               <p>A member of our team will reach out to initiate government ID verification via our secure third-party partner. Takes ~10 min on your end.</p>
             </div>
           </div>
           <div class="p-step">
-            <span class="p-step-icon">📋</span>
             <div class="p-step-body">
               <h4>STEP 3 — Background Check (3–5 business days)</h4>
               <p>Comprehensive criminal history check including sex offender registry screening. Required for all providers — no exceptions. We cover the cost.</p>
             </div>
           </div>
           <div class="p-step">
-            <span class="p-step-icon">🎓</span>
             <div class="p-step-body">
               <h4>STEP 4 — Orientation &amp; Training (self-paced, ~2 hours)</h4>
               <p>Once cleared, you'll complete our online provider orientation covering boundary-setting, consent frameworks, safety protocols, and session best practices.</p>
             </div>
           </div>
           <div class="p-step">
-            <span class="p-step-icon">🚀</span>
             <div class="p-step-body">
               <h4>STEP 5 — Profile Setup &amp; Launch</h4>
               <p>Set your rates, availability, and services — then go live in your market.</p>
@@ -793,7 +787,6 @@
       </div>
 
       <div class="graceful-decline" id="felony-decline">
-        <p style="font-size:1.5rem; margin-bottom:12px;">🙏</p>
         <p>Thank you for your honesty. Unfortunately we're unable to move forward with your application at this time.</p>
         <p style="margin-top:10px; font-size:0.85rem;">If you have questions, you're welcome to reach out to <a href="mailto:providers@pleaseheidi.com" style="color:var(--color-primary);">providers@pleaseheidi.com</a>.</p>
       </div>
@@ -934,7 +927,7 @@
       <div class="footer-brand">
         <a class="logo" href="index.html">
           <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/>
+            <path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#3D7A8A"/>
           </svg>
           Heidi
         </a>

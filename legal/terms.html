@@ -9,15 +9,16 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --color-primary: #e06651;
-      --color-primary-dark: #cc4a37;
-      --color-bg: #fdf4f3;
-      --color-surface: #ffffff;
-      --color-text: #1f2937;
-      --color-text-muted: #6b7280;
-      --color-border: #e5e7eb;
+      --color-primary: #3D7A8A;
+      --color-primary-dark: #2C4A56;
+      --color-bg: #FAFCFC;
+      --color-surface: #EEF5F6;
+      --color-text: #1A2530;
+      --color-text-muted: #7FB5BF;
+      --color-border: #C8E0E4;
       --color-success: #10b981;
-      --color-warning: #f59e0b;
+      --color-warning: #D4A574;
+      --color-accent: #D4A574;
       --font-heading: 'Playfair Display', Georgia, serif;
       --font-body: 'DM Sans', system-ui, sans-serif;
     }
@@ -40,7 +41,7 @@
       .nav-toggle { display: block; }
     }
 
-    .page-hero { background: linear-gradient(135deg, #fdf4f3, #fde8e4); padding: 56px 24px 60px; }
+    .page-hero { background: linear-gradient(135deg, #FAFCFC, #EEF5F6); padding: 56px 24px 60px; }
     .page-hero-inner { max-width: 740px; margin: 0 auto; }
     .page-label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; font-weight: 600; color: var(--color-primary); margin-bottom: 12px; }
     .page-hero h1 { font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--color-text); margin-bottom: 12px; }
@@ -75,7 +76,7 @@
     .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
     .footer-links a:hover { color: #fff; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
-    .footer-disclaimer { background: rgba(224,102,81,0.15); border: 1px solid rgba(224,102,81,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .footer-disclaimer { background: rgba(61,122,138,0.15); border: 1px solid rgba(61,122,138,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
     .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
   </style>
 </head>
@@ -84,7 +85,7 @@
 <nav>
   <div class="nav-inner">
     <a class="logo" href="../index.html">
-      <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/></svg>
+      <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#3D7A8A"/></svg>
       Heidi
     </a>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
@@ -231,7 +232,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <a class="logo" href="../index.html">
-          <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#e06651"/></svg>
+          <svg viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 24s-10-6.5-10-13a6 6 0 0 1 10-4.47A6 6 0 0 1 24 11c0 6.5-10 13-10 13z" fill="#3D7A8A"/></svg>
           Heidi
         </a>
         <p>Vetted, compassionate companionship for the moments when you need a human presence, not a prescription.</p>
