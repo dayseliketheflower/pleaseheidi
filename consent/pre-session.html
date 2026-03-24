@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-Session Consent — Heidi</title>
+  <meta name="description" content="Complete your pre-session consent before your Heidi session begins.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-primary: #3D7A8A;
+      --color-primary-dark: #2C4A56;
+      --color-bg: #FAFCFC;
+      --color-surface: #ffffff;
+      --color-text: #1A2530;
+      --color-text-muted: #7FB5BF;
+      --color-border: #C8E0E4;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── NAV ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--color-surface); box-shadow: 0 1px 12px rgba(0,0,0,0.07); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; text-decoration: none; color: var(--color-primary); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--color-text); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--color-primary); }
+    .btn-nav { background: var(--color-primary); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-weight: 600; transition: background 0.2s !important; white-space: nowrap; }
+    .btn-nav:hover { background: var(--color-primary-dark) !important; color: #fff !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--color-surface); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+    }
+
+    /* ── MAIN ── */
+    main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 56px 24px 80px; }
+
+    /* ── CARD ── */
+    .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 20px; padding: 48px 44px; width: 100%; max-width: 600px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+    @media (max-width: 640px) { .card { padding: 36px 24px; } }
+
+    /* ── PROGRESS ── */
+    .progress-bar-wrap { margin-bottom: 40px; }
+    .progress-label { font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .progress-track { height: 4px; background: var(--color-border); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--color-primary); border-radius: 99px; transition: width 0.35s ease; }
+
+    /* ── HEADINGS ── */
+    .step-heading { font-family: var(--font-heading); font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; color: var(--color-text); margin-bottom: 10px; line-height: 1.25; }
+    .step-sub { font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 36px; }
+
+    /* ── FORM ELEMENTS ── */
+    .field-group { margin-bottom: 24px; }
+    .field-group:last-of-type { margin-bottom: 0; }
+    label.field-label { display: block; font-size: 0.88rem; font-weight: 600; color: var(--color-text); margin-bottom: 8px; }
+    .field-note { font-size: 0.8rem; color: var(--color-text-muted); margin-top: 5px; line-height: 1.5; }
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="tel"],
+    select,
+    textarea { width: 100%; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-text); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: 11px 14px; transition: border-color 0.15s; outline: none; }
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    input[type="time"]:focus,
+    input[type="tel"]:focus,
+    select:focus,
+    textarea:focus { border-color: var(--color-primary); }
+    textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%237FB5BF' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+
+    /* ── TOGGLE ROW ── */
+    .toggle-section { margin-bottom: 32px; }
+    .toggle-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--color-border); }
+    .toggle-row:first-child { border-top: 1px solid var(--color-border); }
+    .toggle-row-label { font-size: 0.95rem; color: var(--color-text); line-height: 1.5; flex: 1; }
+    .toggle-row-label small { display: block; font-size: 0.8rem; color: var(--color-text-muted); margin-top: 3px; }
+    .toggle-group { display: flex; gap: 0; border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+    .toggle-group input[type="radio"] { display: none; }
+    .toggle-group label { padding: 7px 12px; font-size: 0.82rem; font-weight: 500; cursor: pointer; background: var(--color-bg); color: var(--color-text-muted); transition: background 0.15s, color 0.15s; white-space: nowrap; border-right: 1px solid var(--color-border); user-select: none; }
+    .toggle-group label:last-child { border-right: none; }
+    .toggle-group input[type="radio"]:checked + label { background: var(--color-primary); color: #fff; }
+
+    /* ── OPTIONAL TEXT FIELDS ── */
+    .optional-fields { margin-top: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+    /* ── STEP NOTE ── */
+    .step-note { font-size: 0.83rem; color: var(--color-text-muted); line-height: 1.65; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--color-border); }
+
+    /* ── DIVIDER ── */
+    hr.divider { border: none; border-top: 1px solid var(--color-border); margin: 28px 0; }
+
+    /* ── TOUCH SUMMARY ── */
+    .touch-summary { background: #EEF5F6; border: 1px solid var(--color-border); border-radius: 10px; padding: 18px 20px; margin-bottom: 24px; }
+    .touch-summary-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .touch-summary-header p { font-size: 0.85rem; font-weight: 600; color: var(--color-text); text-transform: uppercase; letter-spacing: 0.06em; }
+    .touch-summary-header a { font-size: 0.85rem; color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+    .touch-summary-rows { display: flex; flex-direction: column; gap: 6px; }
+    .touch-summary-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 0.88rem; }
+    .touch-summary-row span:first-child { color: var(--color-text-muted); }
+    .touch-summary-row span:last-child { font-weight: 500; color: var(--color-text); }
+
+    /* ── POLICY BLOCK ── */
+    .policy-text { background: #EEF5F6; border: 1px solid var(--color-border); border-radius: 10px; padding: 18px 20px; margin-bottom: 20px; font-size: 0.93rem; color: var(--color-text); line-height: 1.75; }
+
+    /* ── CHECKBOX ── */
+    .check-item { display: flex; align-items: flex-start; gap: 14px; cursor: pointer; margin-bottom: 32px; }
+    .check-item input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 2px solid var(--color-border); border-radius: 5px; background: var(--color-bg); flex-shrink: 0; margin-top: 2px; cursor: pointer; transition: border-color 0.15s, background 0.15s; position: relative; }
+    .check-item input[type="checkbox"]:checked { background: var(--color-primary); border-color: var(--color-primary); }
+    .check-item input[type="checkbox"]:checked::after { content: ''; position: absolute; top: 3px; left: 6px; width: 5px; height: 9px; border: 2px solid #fff; border-top: none; border-left: none; transform: rotate(45deg); }
+    .check-item input[type="checkbox"]:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    .check-label { font-size: 0.95rem; color: var(--color-text); line-height: 1.6; }
+
+    /* ── BUTTONS ── */
+    .btn-row { display: flex; gap: 12px; align-items: center; }
+    .btn-primary { background: var(--color-primary); color: #fff; border: none; padding: 14px 28px; border-radius: 50px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s, opacity 0.2s; flex: 1; }
+    .btn-primary:hover:not(:disabled) { background: var(--color-primary-dark); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-back { background: none; border: 1px solid var(--color-border); color: var(--color-text-muted); padding: 14px 22px; border-radius: 50px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: border-color 0.2s, color 0.2s; white-space: nowrap; }
+    .btn-back:hover { border-color: var(--color-text-muted); color: var(--color-text); }
+
+    /* ── CONFIRMATION ── */
+    .confirmation { display: none; }
+    .conf-check-circle { width: 64px; height: 64px; border-radius: 50%; background: var(--color-primary); margin: 0 auto 28px; display: flex; align-items: center; justify-content: center; }
+    .conf-check-circle svg { width: 28px; height: 28px; }
+    .confirmation h2 { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin-bottom: 12px; text-align: center; }
+    .confirmation > p { font-size: 0.97rem; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 28px; text-align: center; }
+    .summary-block { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 22px 20px; margin-bottom: 16px; }
+    .summary-block h3 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 14px; }
+    .summary-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 0.9rem; margin-bottom: 8px; }
+    .summary-row:last-child { margin-bottom: 0; }
+    .summary-row span:first-child { color: var(--color-text-muted); }
+    .summary-row span:last-child { font-weight: 500; color: var(--color-text); text-align: right; }
+    .attorney-note { font-size: 0.82rem; color: var(--color-text-muted); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: 12px 14px; line-height: 1.6; margin-top: 20px; }
+
+    /* ── STEPS ── */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    /* ── FOOTER ── */
+    footer { background: #1A2530; color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand .logo { color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.55); max-width: 260px; line-height: 1.6; }
+    .footer-links h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .footer-disclaimer { background: rgba(61,122,138,0.15); border: 1px solid rgba(61,122,138,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">Heidi</a>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect y="4" width="22" height="2" rx="1" fill="#1A2530"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#1A2530"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#1A2530"/>
+      </svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../index.html#how-it-works">How It Works</a></li>
+      <li><a href="../safety.html">Safety</a></li>
+      <li><a href="../index.html#waitlist" class="btn-nav">Join the Waitlist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main>
+  <div class="card">
+
+    <!-- ══ STEP 1 — TOUCH PREFERENCES ══ -->
+    <div class="step active" id="step-1">
+      <div class="progress-bar-wrap">
+        <p class="progress-label">Step 1 of 3</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 33%"></div></div>
+      </div>
+
+      <h1 class="step-heading">Your comfort is the priority</h1>
+      <p class="step-sub">Tell us what feels right for you. There are no wrong answers, and you can update these preferences before any session. The default for everything is No — silence is not consent.</p>
+
+      <div class="toggle-section">
+        <!-- Hand-holding -->
+        <div class="toggle-row">
+          <div class="toggle-row-label">Hand-holding</div>
+          <div class="toggle-group">
+            <input type="radio" name="touch-handholding" id="hh-yes" value="yes">
+            <label for="hh-yes">Yes</label>
+            <input type="radio" name="touch-handholding" id="hh-no" value="no" checked>
+            <label for="hh-no">No</label>
+            <input type="radio" name="touch-handholding" id="hh-ask" value="ask">
+            <label for="hh-ask">Ask</label>
+          </div>
+        </div>
+        <!-- Side-by-side -->
+        <div class="toggle-row">
+          <div class="toggle-row-label">Seated side-by-side with light contact</div>
+          <div class="toggle-group">
+            <input type="radio" name="touch-sidebyside" id="sb-yes" value="yes">
+            <label for="sb-yes">Yes</label>
+            <input type="radio" name="touch-sidebyside" id="sb-no" value="no" checked>
+            <label for="sb-no">No</label>
+            <input type="radio" name="touch-sidebyside" id="sb-ask" value="ask">
+            <label for="sb-ask">Ask</label>
+          </div>
+        </div>
+        <!-- Hug -->
+        <div class="toggle-row">
+          <div class="toggle-row-label">Brief hug at greeting or farewell</div>
+          <div class="toggle-group">
+            <input type="radio" name="touch-hug" id="hug-yes" value="yes">
+            <label for="hug-yes">Yes</label>
+            <input type="radio" name="touch-hug" id="hug-no" value="no" checked>
+            <label for="hug-no">No</label>
+            <input type="radio" name="touch-hug" id="hug-ask" value="ask">
+            <label for="hug-ask">Ask</label>
+          </div>
+        </div>
+        <!-- Being held -->
+        <div class="toggle-row">
+          <div class="toggle-row-label">
+            Being held or cradled during distress
+            <small>Only relevant for emotional support sessions</small>
+          </div>
+          <div class="toggle-group">
+            <input type="radio" name="touch-held" id="held-yes" value="yes">
+            <label for="held-yes">Yes</label>
+            <input type="radio" name="touch-held" id="held-no" value="no" checked>
+            <label for="held-no">No</label>
+            <input type="radio" name="touch-held" id="held-ask" value="ask">
+            <label for="held-ask">Ask</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="optional-fields">
+        <div class="field-group">
+          <label class="field-label" for="touch-comfortable">Any other touch I am comfortable with</label>
+          <textarea id="touch-comfortable" placeholder="Optional"></textarea>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="touch-avoid">Touch I explicitly do not want — beyond the defaults above</label>
+          <textarea id="touch-avoid" placeholder="Optional"></textarea>
+        </div>
+      </div>
+
+      <p class="step-note">Your provider will receive a summary of your preferences — not your exact words. You can update these before any future session.</p>
+
+      <hr class="divider">
+      <div class="btn-row">
+        <button class="btn-primary" id="btn-next-1">Continue</button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 2 — SESSION DETAILS ══ -->
+    <div class="step" id="step-2">
+      <div class="progress-bar-wrap">
+        <p class="progress-label">Step 2 of 3</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 66%"></div></div>
+      </div>
+
+      <h1 class="step-heading">Confirm your session</h1>
+      <p class="step-sub">Review your session details and confirm your agreement before your booking is finalized.</p>
+
+      <!-- Touch summary -->
+      <div class="touch-summary">
+        <div class="touch-summary-header">
+          <p>Touch preferences</p>
+          <a id="edit-touch-link">Edit</a>
+        </div>
+        <div class="touch-summary-rows" id="touch-summary-rows"></div>
+      </div>
+
+      <!-- Session fields -->
+      <div class="field-group">
+        <label class="field-label" for="provider-name">Provider name <span style="color: var(--color-primary)">*</span></label>
+        <input type="text" id="provider-name" placeholder="Your provider's name">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="session-date">Session date <span style="color: var(--color-primary)">*</span></label>
+        <input type="date" id="session-date">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="session-time">Session time <span style="color: var(--color-primary)">*</span></label>
+        <input type="time" id="session-time">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="session-location">Session location type <span style="color: var(--color-primary)">*</span></label>
+        <select id="session-location">
+          <option value="" disabled selected>Select a location type</option>
+          <option value="public">Public location</option>
+          <option value="office">Provider's office</option>
+          <option value="private">Private location (mutual consent and established history required)</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="session-duration">Session duration <span style="color: var(--color-primary)">*</span></label>
+        <select id="session-duration">
+          <option value="" disabled selected>Select duration</option>
+          <option value="1hr">1 hour</option>
+          <option value="1.5hr">1.5 hours</option>
+          <option value="2hr">2 hours</option>
+          <option value="3hr">3 hours</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="topics-avoid">Topics or situations to avoid during this session</label>
+        <textarea id="topics-avoid" placeholder="Optional"></textarea>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="provider-note">Anything you'd like your provider to know</label>
+        <textarea id="provider-note" placeholder="Optional"></textarea>
+        <p class="field-note">This is private and will not be shared verbatim.</p>
+      </div>
+
+      <!-- Policy confirmation -->
+      <hr class="divider">
+      <label class="check-item">
+        <input type="checkbox" id="chk-policy">
+        <span class="check-label">I confirm that I have read Heidi's Nonsexual Services Policy. I understand this session is for nonsexual emotional support and companionship only. I understand that I may end this session at any time and for any reason, without explanation. I understand that my provider may also end this session if a boundary is crossed.</span>
+      </label>
+
+      <div class="btn-row">
+        <button class="btn-back" id="btn-back-2">Back</button>
+        <button class="btn-primary" id="btn-next-2" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- ══ STEP 3 — EMERGENCY CONTACT ══ -->
+    <div class="step" id="step-3">
+      <div class="progress-bar-wrap">
+        <p class="progress-label">Step 3 of 3</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 100%"></div></div>
+      </div>
+
+      <h1 class="step-heading">One last thing</h1>
+      <p class="step-sub">We ask for an emergency contact before every session. This information is never shared with your provider and is only used in the event of a safety emergency.</p>
+
+      <div class="field-group">
+        <label class="field-label" for="ec-name">Emergency contact full name <span style="color: var(--color-primary)">*</span></label>
+        <input type="text" id="ec-name" placeholder="Full name">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="ec-phone">Emergency contact phone number <span style="color: var(--color-primary)">*</span></label>
+        <input type="tel" id="ec-phone" placeholder="Phone number">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="ec-relationship">Relationship to you <span style="color: var(--color-primary)">*</span></label>
+        <input type="text" id="ec-relationship" placeholder="e.g. Friend, sibling, partner">
+      </div>
+
+      <hr class="divider">
+      <label class="check-item">
+        <input type="checkbox" id="chk-ec-aware">
+        <span class="check-label">I confirm that the above contact is aware they are listed as my emergency contact for this session</span>
+      </label>
+
+      <div class="btn-row">
+        <button class="btn-back" id="btn-back-3">Back</button>
+        <button class="btn-primary" id="btn-submit" disabled>Complete &amp; Submit</button>
+      </div>
+    </div>
+
+    <!-- ══ CONFIRMATION ══ -->
+    <div class="confirmation" id="confirmation">
+      <div class="conf-check-circle">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 14.5L11.5 20L22 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2>You're all set.</h2>
+      <p>Your session preferences have been recorded. Your provider will receive a summary before your session begins. If anything changes, contact us before your session starts.</p>
+
+      <div class="summary-block" id="conf-session-summary"></div>
+      <div class="summary-block" id="conf-touch-summary"></div>
+      <div class="summary-block" id="conf-ec-summary"></div>
+
+      <div class="attorney-note">This record has been timestamped and stored securely. [ATTORNEY REVIEW NOTE: timestamp and IP logging to be implemented when backend is connected.]</div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html">Heidi</a>
+        <p>Vetted, compassionate companionship for the moments when you need a human presence, not a prescription.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html#how-it-works">How It Works</a></li>
+          <li><a href="../safety.html">Safety</a></li>
+          <li><a href="../legal/terms.html">Terms of Use</a></li>
+          <li><a href="../legal/privacy.html">Privacy Policy</a></li>
+          <li><a href="../legal/conduct.html">Code of Conduct</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">Not therapy. Not dating. Not sexual services. Heidi provides peer-style emotional support and companionship only.</div>
+      <p class="footer-copy">© 2025 Heidi. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── TOUCH PREFERENCE LABELS ──
+  const touchLabels = {
+    'touch-handholding': 'Hand-holding',
+    'touch-sidebyside':  'Seated side-by-side',
+    'touch-hug':         'Brief hug',
+    'touch-held':        'Being held or cradled',
+  };
+
+  function getTouchPrefs() {
+    const prefs = {};
+    Object.keys(touchLabels).forEach(name => {
+      const checked = document.querySelector(`input[name="${name}"]:checked`);
+      prefs[name] = checked ? checked.value : 'no';
+    });
+    return prefs;
+  }
+
+  function touchValueLabel(val) {
+    return val === 'yes' ? 'Yes' : val === 'ask' ? 'Ask during session' : 'No';
+  }
+
+  function renderTouchSummary() {
+    const prefs = getTouchPrefs();
+    const rows = document.getElementById('touch-summary-rows');
+    rows.innerHTML = Object.entries(touchLabels).map(([name, label]) =>
+      `<div class="touch-summary-row">
+        <span>${label}</span>
+        <span>${touchValueLabel(prefs[name])}</span>
+      </div>`
+    ).join('');
+  }
+
+  // ── STEP NAVIGATION ──
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById('step-' + n);
+    if (target) target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── STEP 1 ──
+  // Step 1 has no required toggles to validate (defaults are set), always enabled
+  document.getElementById('btn-next-1').addEventListener('click', () => {
+    renderTouchSummary();
+    showStep(2);
+  });
+
+  // ── STEP 2 VALIDATION ──
+  const step2Required = ['provider-name', 'session-date', 'session-time', 'session-location', 'session-duration'];
+  const btnNext2 = document.getElementById('btn-next-2');
+  const chkPolicy = document.getElementById('chk-policy');
+
+  function validateStep2() {
+    const fieldsOk = step2Required.every(id => {
+      const el = document.getElementById(id);
+      return el.value && el.value.trim() !== '' && el.value !== '';
+    });
+    btnNext2.disabled = !(fieldsOk && chkPolicy.checked);
+  }
+
+  step2Required.forEach(id => {
+    document.getElementById(id).addEventListener('input', validateStep2);
+    document.getElementById(id).addEventListener('change', validateStep2);
+  });
+  chkPolicy.addEventListener('change', validateStep2);
+
+  document.getElementById('edit-touch-link').addEventListener('click', () => showStep(1));
+  document.getElementById('btn-back-2').addEventListener('click', () => showStep(1));
+
+  btnNext2.addEventListener('click', () => {
+    if (btnNext2.disabled) return;
+    showStep(3);
+  });
+
+  // ── STEP 3 VALIDATION ──
+  const step3Required = ['ec-name', 'ec-phone', 'ec-relationship'];
+  const chkEcAware = document.getElementById('chk-ec-aware');
+  const btnSubmit = document.getElementById('btn-submit');
+
+  function validateStep3() {
+    const fieldsOk = step3Required.every(id => {
+      const el = document.getElementById(id);
+      return el.value && el.value.trim() !== '';
+    });
+    btnSubmit.disabled = !(fieldsOk && chkEcAware.checked);
+  }
+
+  step3Required.forEach(id => {
+    document.getElementById(id).addEventListener('input', validateStep3);
+  });
+  chkEcAware.addEventListener('change', validateStep3);
+
+  document.getElementById('btn-back-3').addEventListener('click', () => showStep(2));
+
+  // ── SUBMIT ──
+  btnSubmit.addEventListener('click', () => {
+    if (btnSubmit.disabled) return;
+
+    const touchPrefs = getTouchPrefs();
+    const locationMap = { public: 'Public location', office: "Provider's office", private: 'Private location' };
+    const durationMap = { '1hr': '1 hour', '1.5hr': '1.5 hours', '2hr': '2 hours', '3hr': '3 hours' };
+
+    const consentRecord = {
+      timestamp: new Date().toISOString(),
+      flow: 'pre-session-v1',
+      platform: 'Heidi',
+      touchPreferences: {
+        handholding:  touchPrefs['touch-handholding'],
+        sideBySide:   touchPrefs['touch-sidebyside'],
+        hug:          touchPrefs['touch-hug'],
+        held:         touchPrefs['touch-held'],
+        comfortableWith: document.getElementById('touch-comfortable').value.trim() || null,
+        explicitlyAvoid: document.getElementById('touch-avoid').value.trim() || null,
+      },
+      sessionDetails: {
+        providerName:   document.getElementById('provider-name').value.trim(),
+        date:           document.getElementById('session-date').value,
+        time:           document.getElementById('session-time').value,
+        locationType:   document.getElementById('session-location').value,
+        duration:       document.getElementById('session-duration').value,
+        topicsToAvoid:  document.getElementById('topics-avoid').value.trim() || null,
+        noteForProvider: document.getElementById('provider-note').value.trim() || null,
+      },
+      consents: {
+        nonsexualServicePolicy: chkPolicy.checked,
+        emergencyContactAware:  chkEcAware.checked,
+      },
+      emergencyContact: {
+        name:         document.getElementById('ec-name').value.trim(),
+        phone:        document.getElementById('ec-phone').value.trim(),
+        relationship: document.getElementById('ec-relationship').value.trim(),
+      },
+    };
+
+    console.log('[Heidi] Pre-session consent record:', consentRecord);
+
+    // ── BUILD CONFIRMATION SUMMARY ──
+    const sessionDate = new Date(consentRecord.sessionDetails.date + 'T' + consentRecord.sessionDetails.time);
+    const dateStr = consentRecord.sessionDetails.date
+      ? new Date(consentRecord.sessionDetails.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+      : '';
+    const timeStr = consentRecord.sessionDetails.time
+      ? new Date('1970-01-01T' + consentRecord.sessionDetails.time).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+      : '';
+
+    document.getElementById('conf-session-summary').innerHTML = `
+      <h3>Session details</h3>
+      <div class="summary-row"><span>Provider</span><span>${consentRecord.sessionDetails.providerName}</span></div>
+      <div class="summary-row"><span>Date</span><span>${dateStr}</span></div>
+      <div class="summary-row"><span>Time</span><span>${timeStr}</span></div>
+      <div class="summary-row"><span>Location</span><span>${locationMap[consentRecord.sessionDetails.locationType] || ''}</span></div>
+      <div class="summary-row"><span>Duration</span><span>${durationMap[consentRecord.sessionDetails.duration] || ''}</span></div>
+    `;
+
+    document.getElementById('conf-touch-summary').innerHTML = `
+      <h3>Touch preferences</h3>
+      ${Object.entries(touchLabels).map(([name, label]) =>
+        `<div class="summary-row"><span>${label}</span><span>${touchValueLabel(touchPrefs[name])}</span></div>`
+      ).join('')}
+    `;
+
+    document.getElementById('conf-ec-summary').innerHTML = `
+      <h3>Emergency contact</h3>
+      <div class="summary-row"><span>Name</span><span>${consentRecord.emergencyContact.name}</span></div>
+      <div class="summary-row"><span>Relationship</span><span>${consentRecord.emergencyContact.relationship}</span></div>
+    `;
+
+    // Show confirmation
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const conf = document.getElementById('confirmation');
+    conf.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── MOBILE NAV ──
+  document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
