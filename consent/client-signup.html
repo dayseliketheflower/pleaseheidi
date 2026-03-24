@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Setup — Heidi</title>
+  <meta name="description" content="Complete your account setup to access Heidi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-primary: #e06651;
+      --color-primary-dark: #cc4a37;
+      --color-bg: #fdf4f3;
+      --color-surface: #ffffff;
+      --color-text: #1f2937;
+      --color-text-muted: #6b7280;
+      --color-border: #e5e7eb;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── NAV ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--color-surface); box-shadow: 0 1px 12px rgba(0,0,0,0.07); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; text-decoration: none; color: var(--color-primary); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--color-text); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--color-primary); }
+    .btn-nav { background: var(--color-primary); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-weight: 600; transition: background 0.2s !important; white-space: nowrap; }
+    .btn-nav:hover { background: var(--color-primary-dark) !important; color: #fff !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--color-surface); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+    }
+
+    /* ── MAIN ── */
+    main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 56px 24px 80px; }
+
+    /* ── CARD ── */
+    .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 20px; padding: 48px 44px; width: 100%; max-width: 560px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+    @media (max-width: 600px) { .card { padding: 36px 24px; } }
+
+    /* ── PROGRESS ── */
+    .progress-bar-wrap { margin-bottom: 40px; }
+    .progress-label { font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .progress-track { height: 4px; background: var(--color-border); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--color-primary); border-radius: 99px; transition: width 0.35s ease; }
+
+    /* ── STEP HEADING ── */
+    .step-heading { font-family: var(--font-heading); font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; color: var(--color-text); margin-bottom: 10px; line-height: 1.25; }
+    .step-sub { font-size: 0.97rem; color: var(--color-text-muted); line-height: 1.65; margin-bottom: 36px; }
+
+    /* ── CHECKBOXES ── */
+    .check-list { display: flex; flex-direction: column; gap: 18px; margin-bottom: 36px; }
+    .check-item { display: flex; align-items: flex-start; gap: 14px; cursor: pointer; }
+    .check-item input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 2px solid var(--color-border); border-radius: 5px; background: var(--color-bg); flex-shrink: 0; margin-top: 2px; cursor: pointer; transition: border-color 0.15s, background 0.15s; position: relative; }
+    .check-item input[type="checkbox"]:checked { background: var(--color-primary); border-color: var(--color-primary); }
+    .check-item input[type="checkbox"]:checked::after { content: ''; position: absolute; top: 3px; left: 6px; width: 5px; height: 9px; border: 2px solid #fff; border-top: none; border-left: none; transform: rotate(45deg); }
+    .check-item input[type="checkbox"]:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    .check-label { font-size: 0.95rem; color: var(--color-text); line-height: 1.55; }
+    .check-label a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
+    .check-label a:hover { color: var(--color-primary-dark); }
+
+    /* ── SCOPE TEXT ── */
+    .scope-text { background: #fff8f7; border: 1px solid #f5cec8; border-radius: 12px; padding: 24px 22px; margin-bottom: 32px; }
+    .scope-text p { font-size: 0.97rem; color: var(--color-text); line-height: 1.8; }
+    .scope-text p + p { margin-top: 14px; }
+
+    /* ── BUTTONS ── */
+    .btn-row { display: flex; gap: 12px; align-items: center; }
+    .btn-primary { background: var(--color-primary); color: #fff; border: none; padding: 14px 28px; border-radius: 50px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s, opacity 0.2s; flex: 1; }
+    .btn-primary:hover:not(:disabled) { background: var(--color-primary-dark); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-back { background: none; border: 1px solid var(--color-border); color: var(--color-text-muted); padding: 14px 22px; border-radius: 50px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: border-color 0.2s, color 0.2s; white-space: nowrap; }
+    .btn-back:hover { border-color: var(--color-text-muted); color: var(--color-text); }
+
+    /* ── CONFIRMATION ── */
+    .confirmation { text-align: center; display: none; }
+    .confirmation .check-circle { width: 64px; height: 64px; border-radius: 50%; background: var(--color-primary); margin: 0 auto 28px; display: flex; align-items: center; justify-content: center; }
+    .confirmation .check-circle svg { width: 28px; height: 28px; }
+    .confirmation h2 { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin-bottom: 14px; }
+    .confirmation p { font-size: 0.97rem; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 16px; }
+    .confirmation .attorney-note { font-size: 0.82rem; color: var(--color-text-muted); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: 12px 14px; line-height: 1.6; margin-top: 24px; text-align: left; }
+
+    /* ── HIDDEN ── */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    /* ── FOOTER ── */
+    footer { background: #1f2937; color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand .logo { color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.55); max-width: 260px; line-height: 1.6; }
+    .footer-links h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .footer-disclaimer { background: rgba(224,102,81,0.12); border: 1px solid rgba(224,102,81,0.25); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">Heidi</a>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect y="4" width="22" height="2" rx="1" fill="#1f2937"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#1f2937"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#1f2937"/>
+      </svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../index.html#how-it-works">How It Works</a></li>
+      <li><a href="../safety.html">Safety</a></li>
+      <li><a href="../index.html#waitlist" class="btn-nav">Join the Waitlist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main>
+  <div class="card">
+
+    <!-- STEP 1 -->
+    <div class="step active" id="step-1">
+      <div class="progress-bar-wrap">
+        <p class="progress-label">Step 1 of 2</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 50%"></div></div>
+      </div>
+
+      <h1 class="step-heading">Before you begin</h1>
+      <p class="step-sub">Please read and confirm each of the following.</p>
+
+      <div class="check-list">
+        <label class="check-item">
+          <input type="checkbox" id="chk-age">
+          <span class="check-label">I am 18 years of age or older</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk-terms">
+          <span class="check-label">I have read and agree to the <a href="../legal/terms.html" target="_blank" rel="noopener">Terms of Service</a></span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk-privacy">
+          <span class="check-label">I have read and agree to the <a href="../legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a></span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk-monitoring">
+          <span class="check-label">I understand that my messages on the platform are monitored for safety and policy compliance</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk-identity">
+          <span class="check-label">I consent to identity verification as a condition of accessing the platform</span>
+        </label>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" id="btn-next" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" id="step-2">
+      <div class="progress-bar-wrap">
+        <p class="progress-label">Step 2 of 2</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 100%"></div></div>
+      </div>
+
+      <h1 class="step-heading">Understanding what Heidi is</h1>
+      <p class="step-sub">This is the foundation of everything we do. Please read carefully before confirming.</p>
+
+      <div class="scope-text">
+        <p>Heidi is a platform for nonsexual emotional support and companionship only. No sexual services are offered, implied, or available through this platform — for any reason, at any price, under any circumstance. This applies to all sessions, all providers, and all clients without exception.</p>
+        <p>Requesting, offering, or engaging in sexual services of any kind results in immediate and permanent removal from the platform.</p>
+      </div>
+
+      <div class="check-list">
+        <label class="check-item">
+          <input type="checkbox" id="chk-nonsexual">
+          <span class="check-label">I understand and agree that Heidi provides nonsexual services only, and that any violation of this policy will result in my immediate removal from the platform</span>
+        </label>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" id="btn-back">Back</button>
+        <button class="btn-primary" id="btn-submit" disabled>Complete &amp; Continue</button>
+      </div>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <div class="confirmation" id="confirmation">
+      <div class="check-circle">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 14.5L11.5 20L22 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2>You're all set.</h2>
+      <p>Your consent has been recorded. You're ready to browse providers and book your first session.</p>
+      <div class="attorney-note">This consent record has been timestamped and stored securely. [ATTORNEY REVIEW NOTE: timestamp and IP logging to be implemented when backend is connected.]</div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html">Heidi</a>
+        <p>Vetted, compassionate companionship for the moments when you need a human presence, not a prescription.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html#how-it-works">How It Works</a></li>
+          <li><a href="../safety.html">Safety</a></li>
+          <li><a href="../legal/terms.html">Terms of Use</a></li>
+          <li><a href="../legal/privacy.html">Privacy Policy</a></li>
+          <li><a href="../legal/conduct.html">Code of Conduct</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">Not therapy. Not dating. Not sexual services. Heidi provides peer-style emotional support and companionship only.</div>
+      <p class="footer-copy">© 2025 Heidi. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── STATE ──
+  const step1Checks = ['chk-age', 'chk-terms', 'chk-privacy', 'chk-monitoring', 'chk-identity'];
+  const step2Checks = ['chk-nonsexual'];
+
+  // ── HELPERS ──
+  function allChecked(ids) {
+    return ids.every(id => document.getElementById(id).checked);
+  }
+
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById('step-' + n);
+    if (target) target.classList.add('active');
+  }
+
+  // ── STEP 1 VALIDATION ──
+  const btnNext = document.getElementById('btn-next');
+  step1Checks.forEach(id => {
+    document.getElementById(id).addEventListener('change', () => {
+      btnNext.disabled = !allChecked(step1Checks);
+    });
+  });
+
+  btnNext.addEventListener('click', () => {
+    if (!allChecked(step1Checks)) return;
+    showStep(2);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── STEP 2 VALIDATION ──
+  const btnSubmit = document.getElementById('btn-submit');
+  step2Checks.forEach(id => {
+    document.getElementById(id).addEventListener('change', () => {
+      btnSubmit.disabled = !allChecked(step2Checks);
+    });
+  });
+
+  // ── BACK ──
+  document.getElementById('btn-back').addEventListener('click', () => {
+    showStep(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── SUBMIT ──
+  btnSubmit.addEventListener('click', () => {
+    if (!allChecked(step2Checks)) return;
+
+    const consentRecord = {
+      timestamp: new Date().toISOString(),
+      consents: {
+        ageVerification: document.getElementById('chk-age').checked,
+        termsOfService: document.getElementById('chk-terms').checked,
+        privacyPolicy: document.getElementById('chk-privacy').checked,
+        messagingMonitoring: document.getElementById('chk-monitoring').checked,
+        identityVerification: document.getElementById('chk-identity').checked,
+        nonsexualServicePolicy: document.getElementById('chk-nonsexual').checked,
+      },
+      platform: 'Heidi',
+      flow: 'client-signup-v1',
+    };
+
+    console.log('[Heidi] Consent record:', consentRecord);
+
+    // Show confirmation
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const conf = document.getElementById('confirmation');
+    conf.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── MOBILE NAV ──
+  document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
