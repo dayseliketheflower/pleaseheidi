@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code of Conduct — Heidi</title>
+  <meta name="description" content="Heidi Code of Conduct and Non-Sexual Services Policy.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
       --color-primary: #3D7A8A;
       --color-primary-dark: #2C4A56;
@@ -16,24 +18,22 @@
       --color-text: #1A2530;
       --color-text-muted: #7FB5BF;
       --color-border: #C8E0E4;
-      --color-success: #10b981;
-      --color-warning: #D4A574;
-      --color-accent: #D4A574;
       --font-heading: 'Playfair Display', Georgia, serif;
       --font-body: 'DM Sans', system-ui, sans-serif;
     }
+
     html { scroll-behavior: smooth; }
     body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
 
+    /* ── NAV ── */
     nav { position: sticky; top: 0; z-index: 100; background: var(--color-surface); box-shadow: 0 1px 12px rgba(0,0,0,0.07); }
     .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--color-primary); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; flex-shrink: 0; }
-    .logo svg { width: 28px; height: 28px; }
+    .logo { display: flex; align-items: center; text-decoration: none; color: var(--color-primary); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; flex-shrink: 0; }
     .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--color-text); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
     .nav-links a:hover { color: var(--color-primary); }
     .btn-nav { background: var(--color-primary); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-weight: 600; transition: background 0.2s !important; white-space: nowrap; }
-    .btn-nav:hover { background: var(--color-primary-dark) !important; }
+    .btn-nav:hover { background: var(--color-primary-dark) !important; color: #fff !important; }
     .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
     @media (max-width: 768px) {
       .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--color-surface); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
@@ -41,51 +41,40 @@
       .nav-toggle { display: block; }
     }
 
-    .page-hero { background: linear-gradient(135deg, #FAFCFC, #EEF5F6); padding: 56px 24px 60px; }
-    .page-hero-inner { max-width: 740px; margin: 0 auto; }
-    .page-label { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; font-weight: 600; color: var(--color-primary); margin-bottom: 12px; }
-    .page-hero h1 { font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: var(--color-text); margin-bottom: 12px; }
-    .page-hero p { color: var(--color-text-muted); font-size: 1rem; line-height: 1.65; max-width: 600px; }
-    .page-hero .meta { color: var(--color-text-muted); font-size: 0.9rem; margin-top: 12px; }
+    /* ── PAGE HEADER ── */
+    .page-header { background: var(--color-text); padding: 64px 24px 72px; text-align: center; }
+    .page-header-inner { max-width: 720px; margin: 0 auto; }
+    .page-label { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; font-weight: 600; color: var(--color-text-muted); margin-bottom: 14px; }
+    .page-header h1 { font-family: var(--font-heading); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 16px; }
+    .page-header p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.8; max-width: 600px; margin: 0 auto; }
 
-    .legal-wrap { max-width: 740px; margin: 0 auto; padding: 56px 24px 80px; }
+    /* ── CONTENT ── */
+    .legal-wrap { max-width: 720px; margin: 0 auto; padding: 72px 24px 96px; }
 
-    .conduct-section { margin-bottom: 48px; scroll-margin-top: 88px; }
-    .conduct-section h2 { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: var(--color-text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--color-border); }
-    .conduct-section p { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.72; margin-bottom: 12px; }
-    .conduct-section p:last-child { margin-bottom: 0; }
-    .conduct-section ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-    .conduct-section li { display: flex; gap: 12px; color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.55; }
-    .conduct-section li::before { content: '→'; color: var(--color-primary); font-weight: 700; flex-shrink: 0; }
-    .conduct-section a { color: var(--color-primary); }
+    .legal-section { margin-bottom: 56px; }
+    .legal-section h2 { font-family: var(--font-heading); font-size: 1.35rem; font-weight: 700; color: var(--color-text); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--color-border); }
+    .legal-section p { color: var(--color-text); font-size: 0.97rem; line-height: 1.8; margin-bottom: 14px; }
+    .legal-section p:last-child { margin-bottom: 0; }
+    .legal-section ul { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-left: 0; margin-top: 4px; }
+    .legal-section ul li { display: flex; gap: 12px; color: var(--color-text); font-size: 0.97rem; line-height: 1.7; }
+    .legal-section ul li::before { content: '\2192'; color: var(--color-primary); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
 
-    .non-neg-box { background: var(--color-text); color: #fff; border-radius: 16px; padding: 32px 28px; margin-bottom: 48px; }
-    .non-neg-box h2 { font-family: var(--font-heading); font-size: 1.3rem; color: #fff; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.15); }
-    .non-neg-box p { color: rgba(255,255,255,0.75); font-size: 0.95rem; line-height: 1.72; margin-bottom: 12px; }
-    .non-neg-box p:last-child { margin-bottom: 0; }
-    .non-neg-box strong { color: #f9a899; }
+    .callout { background: var(--color-surface); border: 1px solid var(--color-border); border-left: 4px solid var(--color-primary); border-radius: 10px; padding: 20px 20px; margin: 20px 0; font-size: 0.97rem; line-height: 1.75; color: var(--color-text); font-weight: 500; }
 
-    .two-role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px; }
-    @media (max-width: 640px) { .two-role-grid { grid-template-columns: 1fr; } }
-    .role-card { background: var(--color-surface); border-radius: 14px; padding: 28px 24px; border: 1px solid var(--color-border); }
-    .role-card h3 { font-weight: 700; font-size: 1rem; color: var(--color-text); margin-bottom: 16px; }
-    .role-card ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .role-card li { display: flex; gap: 10px; color: var(--color-text-muted); font-size: 0.9rem; line-height: 1.5; }
-    .role-card li::before { content: '→'; color: var(--color-primary); font-weight: 700; flex-shrink: 0; }
+    .callout-firm { background: #fff5f4; border: 1px solid #f8c5be; border-left: 4px solid #c0392b; border-radius: 10px; padding: 20px 20px; margin: 20px 0; font-size: 0.97rem; line-height: 1.75; color: var(--color-text); font-weight: 500; }
 
-    .report-cta { background: var(--color-primary); border-radius: 16px; padding: 32px 28px; color: #fff; }
-    .report-cta h3 { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
-    .report-cta p { color: rgba(255,255,255,0.8); margin-bottom: 16px; font-size: 0.95rem; }
-    .report-cta a.btn { background: #fff; color: var(--color-primary); padding: 11px 24px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-block; transition: transform 0.15s; }
-    .report-cta a.btn:hover { transform: translateY(-1px); }
+    a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; }
+    a:hover { color: var(--color-primary-dark); }
 
-    footer { background: var(--color-text); color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
+    /* ── FOOTER ── */
+    footer { background: #1A2530; color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
     .footer-inner { max-width: 1060px; margin: 0 auto; }
     .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
     .footer-brand .logo { color: #fff; margin-bottom: 10px; }
     .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.55); max-width: 260px; line-height: 1.6; }
     .footer-links h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
     .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links ul li::before { display: none; }
     .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
     .footer-links a:hover { color: #fff; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
@@ -95,138 +84,108 @@
 </head>
 <body>
 
+<!-- ── NAV ── -->
 <nav>
   <div class="nav-inner">
-    <a class="logo" href="../index.html">
-      Heidi
-    </a>
-    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect y="4" width="22" height="2" rx="1" fill="#1f2937"/><rect y="10" width="22" height="2" rx="1" fill="#1f2937"/><rect y="16" width="22" height="2" rx="1" fill="#1f2937"/></svg>
+    <a class="logo" href="../index.html">Heidi</a>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect y="4" width="22" height="2" rx="1" fill="#1A2530"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#1A2530"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#1A2530"/>
+      </svg>
     </button>
     <ul class="nav-links">
       <li><a href="../index.html#how-it-works">How It Works</a></li>
       <li><a href="../safety.html">Safety</a></li>
-      <li><a href="../index.html#provider-form">For Providers</a></li>
       <li><a href="../index.html#waitlist" class="btn-nav">Join the Waitlist</a></li>
     </ul>
   </div>
 </nav>
 
-<div class="page-hero">
-  <div class="page-hero-inner">
+<!-- ── PAGE HEADER ── -->
+<header class="page-header">
+  <div class="page-header-inner">
     <p class="page-label">Legal</p>
     <h1>Code of Conduct</h1>
-    <p>These are the standards we hold ourselves — and every person on this platform — to. Warm, yes. But firm where it counts.</p>
-    <p class="meta">Last Updated: March 2025</p>
+    <p>Heidi exists because many people need nonsexual human connection and support — and getting that safely, clearly, and with dignity shouldn't be complicated. This code of conduct is how we protect that.</p>
   </div>
-</div>
+</header>
 
+<!-- ── CONTENT ── -->
 <div class="legal-wrap">
 
-  <div class="conduct-section" id="community-standard">
-    <h2>Our Community Standard</h2>
-    <p>Heidi was built on a simple belief: everyone deserves human connection and compassionate support — especially during the hardest moments of their lives. Our community is made up of people who take that seriously.</p>
-    <p>Whether you're a client looking for support or a provider offering it, you are part of a community that values dignity, safety, and authenticity. These aren't just feel-good words — they are active commitments that shape how every interaction on this platform works.</p>
-    <p>We hold everyone on Heidi to the same standard: treat every person with respect, honor every boundary, and show up with care.</p>
+  <div class="legal-section">
+    <h2>What Heidi Is</h2>
+    <p>Heidi is a platform for emotional companionship, practical support, and safe human presence. That might look like someone to accompany you to a difficult appointment, sit with you through a hard day, help you get through a move or a breakup, or simply be a consistent, caring presence when you need one.</p>
+    <p>Providers on Heidi are vetted, trained, and committed to showing up with care and clear boundaries. Clients come to Heidi because they need something real — not a prescription, not a hookup, not a substitute for therapy.</p>
   </div>
 
-  <div class="non-neg-box" id="non-sexual">
-    <h2>The Non-Sexual Boundary — Non-Negotiable</h2>
-    <p>Every service on Heidi is <strong>strictly non-sexual</strong>. This is not a guideline or a preference — it is the absolute condition of participation for every person on this platform.</p>
-    <p>This means: no sexual communication, no requests or offers of sexual services, and no physical contact of a sexual nature — during sessions, through in-app messaging, or through any channel connected to this platform.</p>
-    <p>Any person — client or provider — who crosses this line is <strong>immediately and permanently removed from Heidi</strong>. Depending on the nature of the violation, we may also report the conduct to relevant authorities.</p>
-    <p>There are no warnings. There is no second chance for sexual violations. This boundary protects everyone, and we enforce it without exception.</p>
+  <div class="legal-section">
+    <h2>What Heidi Is Not</h2>
+    <div class="callout-firm">Heidi is not a sexual services platform. It is not a dating app. It is not an escort service in any sexual sense. It is not a substitute for licensed therapy or mental health treatment.</div>
+    <p>There is no version of Heidi where sexual services are acceptable. Not implicitly, not "by arrangement," not under any circumstances. If that is what you are looking for, this is not the right platform.</p>
+    <p>This is not a gray area. It is the line that makes everything else on this platform possible.</p>
   </div>
 
-  <div class="conduct-section" id="consent">
-    <h2>Consent Framework</h2>
-    <p>Every session on Heidi begins with a session-specific agreement. This agreement documents what services will be offered, what the boundaries are, and what both parties have explicitly consented to. Assumed consent is not consent.</p>
+  <div class="legal-section">
+    <h2>Rules for Everyone</h2>
+    <p>These rules apply to all users — clients and providers alike:</p>
     <ul>
-      <li>You may only provide or receive services that have been explicitly agreed to in advance</li>
-      <li>Consent can be withdrawn at any time, by either party, for any reason — with no explanation required</li>
-      <li>Changing the terms of a session mid-way requires explicit agreement from both parties</li>
-      <li>Pressuring someone to expand the scope of a session is a conduct violation</li>
-    </ul>
-    <p>Heidi's consent model is built on clarity. If it wasn't clearly agreed to, it doesn't happen.</p>
-  </div>
-
-  <div class="conduct-section" id="respect">
-    <h2>Respect &amp; Dignity</h2>
-    <p>Every person on Heidi — regardless of background, identity, or circumstance — deserves to be treated with dignity and respect. Discrimination, harassment, or dehumanizing behavior of any kind has no place here.</p>
-    <ul>
-      <li>Racist, sexist, transphobic, homophobic, or otherwise discriminatory language or behavior is not tolerated</li>
-      <li>Harassment — including persistent unwanted contact, threats, or intimidation — results in immediate removal</li>
-      <li>Mocking someone for their needs, identity, or the kind of support they're seeking is a violation</li>
-      <li>Clients and providers are equal members of this community. Neither role confers power over the other.</li>
+      <li>Be honest about your identity and your intentions when registering and when booking</li>
+      <li>Honor the boundaries you agreed to before the session — do not push, renegotiate, or test them once a session has started</li>
+      <li>Never solicit sexual services — a single instance results in permanent ban with no appeals process</li>
+      <li>Communicate respectfully in all in-app messages; harassment, threats, and demeaning language will result in immediate suspension</li>
+      <li>Report violations you witness or experience — staying silent enables harm</li>
     </ul>
   </div>
 
-  <div class="conduct-section" id="session-conduct">
-    <h2>Session Conduct</h2>
-    <p>During every session, both parties are expected to:</p>
+  <div class="legal-section">
+    <h2>Additional Rules for Providers</h2>
     <ul>
-      <li>Arrive prepared and on time; communicate promptly if something changes</li>
-      <li>Honor the session agreement — do not attempt to expand scope without mutual consent</li>
-      <li>Maintain agreed boundaries throughout the session, even if the conversation feels natural and comfortable</li>
-      <li>Avoid being under the influence of substances that impair judgment during a session</li>
-      <li>Not share session details, personal information, or content from in-app messages without consent</li>
-      <li>Use the in-app report button if anything feels unsafe — you will be believed and supported</li>
+      <li>Conduct all sessions within the agreed service scope only — do not offer or accept requests for services outside what was booked</li>
+      <li>Do not share personal contact information (phone number, social media, personal email) with clients outside the platform</li>
+      <li>Do not agree to meet a client at a private location for a first session unless both parties have an established session history and have explicitly consented to the arrangement</li>
+      <li>You may decline any session for any reason — your comfort and safety matter on this platform too</li>
     </ul>
   </div>
 
-  <div class="two-role-grid">
-    <div class="role-card" id="provider-rules">
-      <h3>Provider-Specific Rules</h3>
-      <ul>
-        <li>You may decline any session for any reason — this right is protected and unconditional</li>
-        <li>Do not initiate physical contact of any kind that has not been explicitly agreed to in advance</li>
-        <li>Do not share client personal information with anyone outside the platform</li>
-        <li>Do not solicit off-platform contact to avoid Heidi's safety infrastructure</li>
-        <li>Complete all required training before accepting your first session</li>
-        <li>Maintain current and accurate profile information including services offered and availability</li>
-        <li>Report any client behavior that made you feel unsafe or uncomfortable, even if you're not sure if it "counts"</li>
-      </ul>
-    </div>
-    <div class="role-card" id="client-rules">
-      <h3>Client-Specific Rules</h3>
-      <ul>
-        <li>Do not request, suggest, or attempt to negotiate services not listed in the provider's profile</li>
-        <li>Do not attempt to contact a provider outside of Heidi's platform channels</li>
-        <li>Understand that providers can end or decline sessions — this is their right, always</li>
-        <li>Leave honest, accurate reviews — false reviews intended to harm a provider are a violation</li>
-        <li>Do not share your own or a provider's personal information with third parties</li>
-        <li>Treat providers as the skilled, caring people they are — not as a service commodity</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="conduct-section" id="reporting">
-    <h2>Reporting Violations</h2>
-    <p>We take every report seriously. You don't have to be certain something is a violation to report it — if something felt off, we want to know.</p>
+  <div class="legal-section">
+    <h2>Additional Rules for Clients</h2>
     <ul>
-      <li>Use the in-app report button during any active session for immediate escalation</li>
-      <li>Submit a report via our <a href="../contact.html">contact page</a> at any time</li>
-      <li>Anonymous reporting is available — no account required</li>
-      <li>All reports are reviewed within 24 hours by a trained member of our team</li>
+      <li>Do not pressure a provider to change the scope of a session, extend the session without consent, or agree to anything outside the original booking</li>
+      <li>If a provider makes you feel unsafe or uncomfortable — for any reason — report it immediately using the in-app report button or by contacting us directly</li>
+      <li>Providers have the right to end any session at any time. Do not retaliate through ratings or messaging.</li>
     </ul>
-    <p>Retaliation against someone who reports a concern is itself a serious violation and will result in immediate removal from the platform.</p>
   </div>
 
-  <div class="report-cta">
-    <h3>Need to report something?</h3>
-    <p>You don't have to be sure it's a violation. If something felt wrong, reach out. We're here.</p>
-    <a href="../contact.html" class="btn">→ Contact Safety Team</a>
+  <div class="legal-section">
+    <h2>Enforcement</h2>
+    <p>Heidi reviews all reports and applies enforcement proportional to the severity of the violation:</p>
+    <ul>
+      <li>Minor violations (disrespectful messaging, late cancellation) — formal warning and documented record</li>
+      <li>Repeated or escalating violations — account suspension pending review</li>
+      <li>Serious violations (harassment, boundary violations, intimidation) — permanent ban</li>
+      <li>Sexual solicitation of any kind — immediate permanent ban, no warnings, no appeals</li>
+    </ul>
+    <p>Heidi reserves the right to cooperate with law enforcement where required, including sharing account records relevant to criminal activity.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>How to Report</h2>
+    <p>Use the report button visible during any active session for immediate escalation. For incidents outside an active session, or if you want to report something you observed rather than experienced, reach us at <a href="mailto:">[CONTACT EMAIL]</a>.</p>
+    <p>All reports are reviewed by a person on the Heidi team — not an automated system. We respond to all safety reports within 2 hours during active session windows.</p>
+    <p>You do not need to be a registered user to file a report.</p>
   </div>
 
 </div>
 
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a class="logo" href="../index.html">
-      Heidi
-        </a>
+        <a class="logo" href="../index.html">Heidi</a>
         <p>Vetted, compassionate companionship for the moments when you need a human presence, not a prescription.</p>
       </div>
       <div class="footer-links">
@@ -234,9 +193,9 @@
         <ul>
           <li><a href="../index.html#how-it-works">How It Works</a></li>
           <li><a href="../safety.html">Safety</a></li>
-          <li><a href="terms.html" target="_blank" rel="noopener">Terms of Use</a></li>
-          <li><a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a></li>
-          <li><a href="conduct.html" target="_blank" rel="noopener">Code of Conduct</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="conduct.html">Code of Conduct</a></li>
           <li><a href="../contact.html">Contact</a></li>
         </ul>
       </div>
@@ -247,5 +206,11 @@
     </div>
   </div>
 </footer>
+
+<script>
+  document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+</script>
 </body>
 </html>
