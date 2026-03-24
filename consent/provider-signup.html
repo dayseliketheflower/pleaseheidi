@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provider Application — Heidi</title>
+  <meta name="description" content="Complete your provider application to go live on Heidi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-primary: #3D7A8A;
+      --color-primary-dark: #2C4A56;
+      --color-bg: #FAFCFC;
+      --color-surface: #ffffff;
+      --color-text: #1A2530;
+      --color-text-muted: #7FB5BF;
+      --color-border: #C8E0E4;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* ── NAV ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--color-surface); box-shadow: 0 1px 12px rgba(0,0,0,0.07); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; text-decoration: none; color: var(--color-primary); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--color-text); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--color-primary); }
+    .btn-nav { background: var(--color-primary); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-weight: 600; transition: background 0.2s !important; white-space: nowrap; }
+    .btn-nav:hover { background: var(--color-primary-dark) !important; color: #fff !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--color-surface); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+    }
+
+    /* ── MAIN ── */
+    main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 56px 24px 80px; }
+
+    /* ── CARD ── */
+    .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 20px; padding: 48px 44px; width: 100%; max-width: 580px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+    @media (max-width: 600px) { .card { padding: 36px 24px; } }
+
+    /* ── PROGRESS ── */
+    .progress-bar-wrap { margin-bottom: 40px; }
+    .progress-label { font-size: 0.8rem; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+    .progress-track { height: 4px; background: var(--color-border); border-radius: 99px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--color-primary); border-radius: 99px; transition: width 0.35s ease; }
+
+    /* ── STEP HEADING ── */
+    .step-heading { font-family: var(--font-heading); font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; color: var(--color-text); margin-bottom: 10px; line-height: 1.25; }
+    .step-sub { font-size: 0.97rem; color: var(--color-text-muted); line-height: 1.65; margin-bottom: 36px; }
+
+    /* ── CHECKBOXES ── */
+    .check-list { display: flex; flex-direction: column; gap: 18px; margin-bottom: 36px; }
+    .check-item { display: flex; align-items: flex-start; gap: 14px; cursor: pointer; }
+    .check-item input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 2px solid var(--color-border); border-radius: 5px; background: var(--color-bg); flex-shrink: 0; margin-top: 2px; cursor: pointer; transition: border-color 0.15s, background 0.15s; position: relative; }
+    .check-item input[type="checkbox"]:checked { background: var(--color-primary); border-color: var(--color-primary); }
+    .check-item input[type="checkbox"]:checked::after { content: ''; position: absolute; top: 3px; left: 6px; width: 5px; height: 9px; border: 2px solid #fff; border-top: none; border-left: none; transform: rotate(45deg); }
+    .check-item input[type="checkbox"]:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    .check-label { font-size: 0.95rem; color: var(--color-text); line-height: 1.55; }
+    .check-label a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
+    .check-label a:hover { color: var(--color-primary-dark); }
+
+    /* ── SCOPE TEXT ── */
+    .scope-text { background: #EEF5F6; border: 1px solid var(--color-border); border-radius: 12px; padding: 24px 22px; margin-bottom: 32px; }
+    .scope-text p { font-size: 0.97rem; color: var(--color-text); line-height: 1.8; }
+    .scope-text p + p { margin-top: 14px; }
+
+    /* ── ROLE SELECTOR ── */
+    .role-section { margin-bottom: 32px; }
+    .role-label { font-size: 0.95rem; font-weight: 600; color: var(--color-text); margin-bottom: 14px; }
+    .role-options { display: flex; flex-direction: column; gap: 10px; }
+    .role-option { display: flex; align-items: flex-start; gap: 14px; cursor: pointer; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 10px; padding: 14px 16px; transition: border-color 0.15s; }
+    .role-option:has(input:checked) { border-color: var(--color-primary); background: #EEF5F6; }
+    .role-option input[type="radio"] { appearance: none; -webkit-appearance: none; width: 18px; height: 18px; border: 2px solid var(--color-border); border-radius: 50%; background: #fff; flex-shrink: 0; margin-top: 2px; cursor: pointer; transition: border-color 0.15s; position: relative; }
+    .role-option input[type="radio"]:checked { border-color: var(--color-primary); border-width: 5px; }
+    .role-option input[type="radio"]:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+    .role-text { display: flex; flex-direction: column; gap: 2px; }
+    .role-name { font-size: 0.97rem; font-weight: 600; color: var(--color-text); }
+    .role-desc { font-size: 0.85rem; color: var(--color-text-muted); line-height: 1.45; }
+
+    /* ── DIVIDER ── */
+    .check-divider { border: none; border-top: 1px solid var(--color-border); margin: 24px 0; }
+
+    /* ── SECTION LABEL ── */
+    .check-section-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 16px; }
+
+    /* ── COMPANION EXTRAS ── */
+    #companion-extras { display: none; }
+    #companion-extras.visible { display: block; }
+
+    /* ── BUTTONS ── */
+    .btn-row { display: flex; gap: 12px; align-items: center; }
+    .btn-primary { background: var(--color-primary); color: #fff; border: none; padding: 14px 28px; border-radius: 50px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s, opacity 0.2s; flex: 1; }
+    .btn-primary:hover:not(:disabled) { background: var(--color-primary-dark); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-back { background: none; border: 1px solid var(--color-border); color: var(--color-text-muted); padding: 14px 22px; border-radius: 50px; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: border-color 0.2s, color 0.2s; white-space: nowrap; }
+    .btn-back:hover { border-color: var(--color-text-muted); color: var(--color-text); }
+
+    /* ── CONFIRMATION ── */
+    .confirmation { text-align: center; display: none; }
+    .confirmation .check-circle { width: 64px; height: 64px; border-radius: 50%; background: var(--color-primary); margin: 0 auto 28px; display: flex; align-items: center; justify-content: center; }
+    .confirmation .check-circle svg { width: 28px; height: 28px; }
+    .confirmation h2 { font-family: var(--font-heading); font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin-bottom: 14px; }
+    .confirmation p { font-size: 0.97rem; color: var(--color-text-muted); line-height: 1.7; margin-bottom: 16px; }
+    .confirmation .attorney-note { font-size: 0.82rem; color: var(--color-text-muted); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; padding: 12px 14px; line-height: 1.6; margin-top: 24px; text-align: left; }
+
+    /* ── STEPS ── */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    /* ── FOOTER ── */
+    footer { background: #1A2530; color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand .logo { color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.55); max-width: 260px; line-height: 1.6; }
+    .footer-links h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .footer-disclaimer { background: rgba(61,122,138,0.15); border: 1px solid rgba(61,122,138,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="../index.html">Heidi</a>
+    <button class="nav-toggle" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <rect y="4" width="22" height="2" rx="1" fill="#1A2530"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#1A2530"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#1A2530"/>
+      </svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="../index.html#how-it-works">How It Works</a></li>
+      <li><a href="../safety.html">Safety</a></li>
+      <li><a href="../index.html#waitlist" class="btn-nav">Join the Waitlist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main>
+  <div class="card">
+
+    <!-- STEP 1 -->
+    <div class="step active" id="step-1">
+      <div class="progress-bar-wrap">
+        <p class="progress-label">Step 1 of 3</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 33%"></div></div>
+      </div>
+
+      <h1 class="step-heading">Before you begin</h1>
+      <p class="step-sub">Please read and confirm each of the following.</p>
+
+      <div class="check-list">
+        <label class="check-item">
+          <input type="checkbox" id="chk-age">
+          <span class="check-label">I am 18 years of age or older</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk-terms">
+          <span class="check-label">I have read and agree to the <a href="../legal/terms.html" target="_blank" rel="noopener">Terms of Service</a></span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk-privacy">
+          <span class="check-label">I have read and agree to the <a href="../legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a></span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk-monitoring">
+          <span class="check-label">I understand that my messages on the platform are monitored for safety and policy compliance</span>
+        </label>
+        <label class="check-item">
+          <input type="checkbox" id="chk-screening">
+          <span class="check-label">I consent to identity verification and background screening as a condition of becoming a provider</span>
+        </label>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-primary" id="btn-next-1" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step" id="step-2">
+      <div class="progress-bar-wrap">
+        <p class="progress-label">Step 2 of 3</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 66%"></div></div>
+      </div>
+
+      <h1 class="step-heading">Understanding what Heidi is</h1>
+      <p class="step-sub">This is the foundation of everything we do. Please read carefully before confirming.</p>
+
+      <div class="scope-text">
+        <p>Heidi is a platform for nonsexual emotional support and companionship only. No sexual services are offered, implied, or available through this platform — for any reason, at any price, under any circumstance. This applies to all sessions, all providers, and all clients without exception.</p>
+        <p>Offering, negotiating, or engaging in sexual services of any kind results in immediate and permanent removal from the platform.</p>
+      </div>
+
+      <div class="check-list">
+        <label class="check-item">
+          <input type="checkbox" id="chk-nonsexual">
+          <span class="check-label">I understand and agree that Heidi provides nonsexual services only, and that any violation of this policy will result in my immediate and permanent removal from the platform</span>
+        </label>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn-back" id="btn-back-2">Back</button>
+        <button class="btn-primary" id="btn-next-2" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step" id="step-3">
+      <div class="progress-bar-wrap">
+        <p class="progress-label">Step 3 of 3</p>
+        <div class="progress-track"><div class="progress-fill" style="width: 100%"></div></div>
+      </div>
+
+      <h1 class="step-heading">Your role as a provider</h1>
+      <p class="step-sub">Please read and confirm each of the following before your listing goes live.</p>
+
+      <!-- Role selector -->
+      <div class="role-section">
+        <p class="role-label">I am joining as a:</p>
+        <div class="role-options">
+          <label class="role-option">
+            <input type="radio" name="provider-role" id="role-standard" value="standard">
+            <div class="role-text">
+              <span class="role-name">Standard Provider</span>
+            </div>
+          </label>
+          <label class="role-option">
+            <input type="radio" name="provider-role" id="role-companion" value="steady_companion">
+            <div class="role-text">
+              <span class="role-name">Steady Companion</span>
+              <span class="role-desc">Currently enrolled in an accredited nursing program</span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Core checkboxes — hidden until role is selected -->
+      <div id="provider-checks" style="display: none;">
+        <hr class="check-divider">
+        <p class="check-section-label">All providers</p>
+        <div class="check-list" style="margin-bottom: 0;">
+          <label class="check-item">
+            <input type="checkbox" id="chk-contractor">
+            <span class="check-label">I am an independent contractor, not an employee of Heidi</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-taxes">
+            <span class="check-label">I am solely responsible for my own taxes and insurance</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-no-outside-contact">
+            <span class="check-label">I will not contact clients outside the Heidi platform under any circumstances</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-report-violations">
+            <span class="check-label">I will report any boundary violation — by a client or by myself — to the Heidi team immediately</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-no-sexual">
+            <span class="check-label">I will not negotiate, offer, or engage in sexual services under any circumstance</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-bg-renewal">
+            <span class="check-label">I consent to annual background check renewal as a condition of remaining active on the platform</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-arrest-notify">
+            <span class="check-label">I will notify Heidi of any criminal charge or arrest within 48 hours</span>
+          </label>
+        </div>
+
+        <!-- Steady Companion extras -->
+        <div id="companion-extras">
+          <hr class="check-divider">
+          <p class="check-section-label">Steady Companion</p>
+          <div class="check-list" style="margin-bottom: 0;">
+            <label class="check-item">
+              <input type="checkbox" id="chk-nursing">
+              <span class="check-label">I am currently enrolled in an accredited nursing program</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" id="chk-support-only">
+              <span class="check-label">I understand that my role on Heidi is emotional support only — not clinical care of any kind</span>
+            </label>
+          </div>
+        </div>
+
+        <hr class="check-divider">
+        <div class="btn-row">
+          <button class="btn-back" id="btn-back-3">Back</button>
+          <button class="btn-primary" id="btn-submit" disabled>Complete &amp; Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <div class="confirmation" id="confirmation">
+      <div class="check-circle">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 14.5L11.5 20L22 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2>Application received.</h2>
+      <p>Your consent has been recorded. Our team will be in touch within 48 hours to initiate identity verification. Once cleared, you'll move on to your background check and provider orientation.</p>
+      <div class="attorney-note">This consent record has been timestamped and stored securely. [ATTORNEY REVIEW NOTE: timestamp and IP logging to be implemented when backend is connected.]</div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="../index.html">Heidi</a>
+        <p>Vetted, compassionate companionship for the moments when you need a human presence, not a prescription.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="../index.html#how-it-works">How It Works</a></li>
+          <li><a href="../safety.html">Safety</a></li>
+          <li><a href="../legal/terms.html">Terms of Use</a></li>
+          <li><a href="../legal/privacy.html">Privacy Policy</a></li>
+          <li><a href="../legal/conduct.html">Code of Conduct</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">Not therapy. Not dating. Not sexual services. Heidi provides peer-style emotional support and companionship only.</div>
+      <p class="footer-copy">© 2025 Heidi. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── STEP 1 ──
+  const step1Ids = ['chk-age', 'chk-terms', 'chk-privacy', 'chk-monitoring', 'chk-screening'];
+  const btnNext1 = document.getElementById('btn-next-1');
+
+  function allChecked(ids) {
+    return ids.every(id => document.getElementById(id).checked);
+  }
+
+  step1Ids.forEach(id => {
+    document.getElementById(id).addEventListener('change', () => {
+      btnNext1.disabled = !allChecked(step1Ids);
+    });
+  });
+
+  btnNext1.addEventListener('click', () => {
+    if (btnNext1.disabled) return;
+    showStep(2);
+  });
+
+  // ── STEP 2 ──
+  const btnNext2 = document.getElementById('btn-next-2');
+
+  document.getElementById('chk-nonsexual').addEventListener('change', function() {
+    btnNext2.disabled = !this.checked;
+  });
+
+  document.getElementById('btn-back-2').addEventListener('click', () => showStep(1));
+
+  btnNext2.addEventListener('click', () => {
+    if (btnNext2.disabled) return;
+    showStep(3);
+  });
+
+  // ── STEP 3 — ROLE SELECTOR ──
+  const coreIds = ['chk-contractor', 'chk-taxes', 'chk-no-outside-contact', 'chk-report-violations', 'chk-no-sexual', 'chk-bg-renewal', 'chk-arrest-notify'];
+  const companionIds = ['chk-nursing', 'chk-support-only'];
+  const btnSubmit = document.getElementById('btn-submit');
+  let selectedRole = null;
+
+  function validateStep3() {
+    if (!selectedRole) { btnSubmit.disabled = true; return; }
+    const coreOk = allChecked(coreIds);
+    const companionOk = selectedRole === 'steady_companion' ? allChecked(companionIds) : true;
+    btnSubmit.disabled = !(coreOk && companionOk);
+  }
+
+  document.querySelectorAll('input[name="provider-role"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      selectedRole = this.value;
+      document.getElementById('provider-checks').style.display = 'block';
+      const companionExtras = document.getElementById('companion-extras');
+      if (selectedRole === 'steady_companion') {
+        companionExtras.classList.add('visible');
+      } else {
+        companionExtras.classList.remove('visible');
+        companionIds.forEach(id => { document.getElementById(id).checked = false; });
+      }
+      validateStep3();
+    });
+  });
+
+  coreIds.forEach(id => {
+    document.getElementById(id).addEventListener('change', validateStep3);
+  });
+  companionIds.forEach(id => {
+    document.getElementById(id).addEventListener('change', validateStep3);
+  });
+
+  document.getElementById('btn-back-3').addEventListener('click', () => showStep(2));
+
+  // ── SUBMIT ──
+  btnSubmit.addEventListener('click', () => {
+    if (btnSubmit.disabled) return;
+
+    const consentRecord = {
+      timestamp: new Date().toISOString(),
+      flow: 'provider-signup-v1',
+      platform: 'Heidi',
+      providerRole: selectedRole,
+      consents: {
+        ageVerification: document.getElementById('chk-age').checked,
+        termsOfService: document.getElementById('chk-terms').checked,
+        privacyPolicy: document.getElementById('chk-privacy').checked,
+        messagingMonitoring: document.getElementById('chk-monitoring').checked,
+        backgroundScreening: document.getElementById('chk-screening').checked,
+        nonsexualServicePolicy: document.getElementById('chk-nonsexual').checked,
+        independentContractor: document.getElementById('chk-contractor').checked,
+        taxesAndInsurance: document.getElementById('chk-taxes').checked,
+        noPlatformContact: document.getElementById('chk-no-outside-contact').checked,
+        reportViolations: document.getElementById('chk-report-violations').checked,
+        noSexualServices: document.getElementById('chk-no-sexual').checked,
+        annualBackgroundRenewal: document.getElementById('chk-bg-renewal').checked,
+        arrestNotification: document.getElementById('chk-arrest-notify').checked,
+        ...(selectedRole === 'steady_companion' && {
+          nursingEnrollment: document.getElementById('chk-nursing').checked,
+          emotionalSupportOnly: document.getElementById('chk-support-only').checked,
+        }),
+      },
+    };
+
+    console.log('[Heidi] Provider consent record:', consentRecord);
+
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('confirmation').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ── HELPERS ──
+  function showStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── MOBILE NAV ──
+  document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.nav-links').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
