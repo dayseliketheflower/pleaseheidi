@@ -11,13 +11,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --color-primary: #3D7A8A;
-      --color-primary-dark: #2C4A56;
-      --color-bg: #FAFCFC;
-      --color-surface: #EEF5F6;
-      --color-text: #1A2530;
-      --color-text-muted: #7FB5BF;
-      --color-border: #C8E0E4;
+      --color-primary: #5C2D5C;
+      --color-primary-dark: #3D1A3D;
+      --color-primary-mid: #8B5A8B;
+      --color-primary-light: #F5EDF5;
+      --color-primary-border: #D4B8D4;
+      --color-bg: #FBF7F2;
+      --color-surface: #F4EDE3;
+      --color-text: #2A1F2A;
+      --color-text-muted: #6B5A6B;
+      --color-border: #E8DDD0;
       --color-warning: #D4A574;
       --font-heading: 'Playfair Display', Georgia, serif;
       --font-body: 'DM Sans', system-ui, sans-serif;
@@ -60,7 +63,7 @@
     /* ── TIMELINE ── */
     .timeline-section { margin-bottom: 72px; }
     .timeline { display: flex; flex-direction: column; position: relative; padding-left: 56px; }
-    .timeline::before { content: ''; position: absolute; left: 20px; top: 24px; bottom: 24px; width: 2px; background: linear-gradient(to bottom, var(--color-primary), rgba(61,122,138,0.12)); }
+    .timeline::before { content: ''; position: absolute; left: 20px; top: 24px; bottom: 24px; width: 2px; background: linear-gradient(to bottom, var(--color-primary), rgba(92,45,92,0.12)); }
     .timeline-item { position: relative; padding: 0 0 36px 28px; }
     .timeline-item:last-child { padding-bottom: 0; }
     .t-number { position: absolute; left: -56px; width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: #fff; font-family: var(--font-heading); font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; z-index: 1; }
@@ -100,7 +103,7 @@
     .section-divider { border: none; border-top: 1px solid var(--color-border); margin: 0 0 64px; }
 
     /* ── FOOTER ── */
-    footer { background: #1A2530; color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
+    footer { background: #2A1F2A; color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
     .footer-inner { max-width: 1060px; margin: 0 auto; }
     .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
     .footer-brand .logo { color: #fff; margin-bottom: 10px; }
@@ -110,7 +113,7 @@
     .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
     .footer-links a:hover { color: #fff; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
-    .footer-disclaimer { background: rgba(61,122,138,0.15); border: 1px solid rgba(61,122,138,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .footer-disclaimer { background: rgba(92,45,92,0.15); border: 1px solid rgba(92,45,92,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
     .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
   </style>
 </head>
@@ -122,14 +125,15 @@
     <a class="logo" href="index.html">Heidi</a>
     <button class="nav-toggle" aria-label="Toggle menu">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <rect y="4" width="22" height="2" rx="1" fill="#1A2530"/>
-        <rect y="10" width="22" height="2" rx="1" fill="#1A2530"/>
-        <rect y="16" width="22" height="2" rx="1" fill="#1A2530"/>
+        <rect y="4" width="22" height="2" rx="1" fill="#2A1F2A"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#2A1F2A"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#2A1F2A"/>
       </svg>
     </button>
     <ul class="nav-links">
       <li><a href="index.html#how-it-works">How It Works</a></li>
       <li><a href="safety.html">Safety</a></li>
+      <li><a href="apply.html">Become a provider</a></li>
       <li><a href="index.html#waitlist" class="btn-nav">Join the Waitlist</a></li>
     </ul>
   </div>

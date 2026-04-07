@@ -11,13 +11,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --color-primary: #3D7A8A;
-      --color-primary-dark: #2C4A56;
-      --color-bg: #FAFCFC;
-      --color-surface: #EEF5F6;
-      --color-text: #1A2530;
-      --color-text-muted: #7FB5BF;
-      --color-border: #C8E0E4;
+      --color-primary: #5C2D5C;
+      --color-primary-dark: #3D1A3D;
+      --color-primary-mid: #8B5A8B;
+      --color-primary-light: #F5EDF5;
+      --color-primary-border: #D4B8D4;
+      --color-bg: #FBF7F2;
+      --color-surface: #F4EDE3;
+      --color-text: #2A1F2A;
+      --color-text-muted: #6B5A6B;
+      --color-border: #E8DDD0;
       --color-success: #10b981;
       --color-warning: #D4A574;
       --color-accent: #D4A574;
@@ -98,7 +101,7 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, #FAFCFC 0%, #EEF5F6 100%);
+      background: linear-gradient(135deg, #FBF7F2 0%, #F4EDE3 100%);
       padding: 80px 24px 90px;
       text-align: center;
     }
@@ -234,7 +237,7 @@
     .how-card p { color: var(--color-text-muted); font-size: 0.95rem; }
 
     /* ── SERVICES ── */
-    .services-section { background: linear-gradient(135deg, #FAFCFC, #EEF5F6); }
+    .services-section { background: linear-gradient(135deg, #FBF7F2, #F4EDE3); }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -244,7 +247,7 @@
       background: var(--color-surface);
       border-radius: 14px;
       padding: 28px 24px;
-      border: 1px solid rgba(61, 122, 138, 0.15);
+      border: 1px solid rgba(92,45,92,0.15);
       display: flex;
       gap: 16px;
       align-items: flex-start;
@@ -329,7 +332,7 @@
       letter-spacing: 0.08em;
       margin-bottom: 16px;
     }
-    .badge-client { background: #EEF5F6; color: var(--color-primary); }
+    .badge-client { background: #F5EDF5; color: var(--color-primary); }
     .badge-provider { background: #ede9fe; color: #6366f1; }
 
     .form-panel h2 {
@@ -372,7 +375,7 @@
     }
     .field input:focus,
     .field select:focus,
-    .field textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(61,122,138,0.1); }
+    .field textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(92,45,92,0.1); }
     .field textarea { resize: vertical; min-height: 90px; }
     .field select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
     .field input.error, .field select.error, .field textarea.error { border-color: #ef4444; }
@@ -464,7 +467,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: #1A2530;
+      background: #2A1F2A;
       color: rgba(255,255,255,0.85);
       padding: 56px 24px 32px;
     }
@@ -493,8 +496,8 @@
       gap: 10px;
     }
     .footer-disclaimer {
-      background: rgba(61,122,138,0.15);
-      border: 1px solid rgba(61,122,138,0.3);
+      background: rgba(92,45,92,0.15);
+      border: 1px solid rgba(92,45,92,0.3);
       border-radius: 8px;
       padding: 12px 16px;
       font-size: 0.82rem;
@@ -518,15 +521,15 @@
     </a>
     <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-        <rect y="4" width="22" height="2" rx="1" fill="#1f2937"/>
-        <rect y="10" width="22" height="2" rx="1" fill="#1f2937"/>
-        <rect y="16" width="22" height="2" rx="1" fill="#1f2937"/>
+        <rect y="4" width="22" height="2" rx="1" fill="#2A1F2A"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#2A1F2A"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#2A1F2A"/>
       </svg>
     </button>
     <ul class="nav-links">
       <li><a href="#how-it-works">How It Works</a></li>
       <li><a href="safety.html">Safety</a></li>
-      <li><a href="#provider-form">For Providers</a></li>
+      <li><a href="apply.html">Become a provider</a></li>
       <li><a href="#client-form" class="btn-nav">Join the Waitlist</a></li>
     </ul>
   </div>
@@ -587,35 +590,35 @@
     <p class="section-sub">Heidi is for the moments your therapist can't be there — and for needs that don't fit neatly into a clinical appointment.</p>
     <div class="services-grid">
       <div class="service-card">
-        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#F5EDF5" stroke="#5C2D5C" stroke-width="1.5"/></svg>
         <div>
           <h3>Medical &amp; Appointment Accompaniment</h3>
           <p>Someone to sit with you at a difficult appointment, drive you home, or just be present when you can't face it alone.</p>
         </div>
       </div>
       <div class="service-card">
-        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#F5EDF5" stroke="#5C2D5C" stroke-width="1.5"/></svg>
         <div>
           <h3>Emotional Presence During Hard Times</h3>
           <p>A compassionate companion when you're grieving, overwhelmed, or just need someone to witness what you're going through.</p>
         </div>
       </div>
       <div class="service-card">
-        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#F5EDF5" stroke="#5C2D5C" stroke-width="1.5"/></svg>
         <div>
           <h3>Public Companionship</h3>
           <p>Walks, errands, outings — a warm presence in everyday life for those moments when isolation creeps in.</p>
         </div>
       </div>
       <div class="service-card">
-        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#F5EDF5" stroke="#5C2D5C" stroke-width="1.5"/></svg>
         <div>
           <h3>Platonic Physical Comfort</h3>
           <p>Hand-holding, sitting close, being held — only ever if desired, always within clear, agreed boundaries.</p>
         </div>
       </div>
       <div class="service-card">
-        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#EEF5F6" stroke="#3D7A8A" stroke-width="1.5"/></svg>
+        <svg class="service-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#F5EDF5" stroke="#5C2D5C" stroke-width="1.5"/></svg>
         <div>
           <h3>Listening Sessions</h3>
           <p>No advice unless asked. No fixing. Just a real person giving you their full, undivided attention.</p>

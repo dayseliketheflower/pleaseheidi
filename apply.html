@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Become a Provider — Heidi</title>
+  <meta name="description" content="Apply to become a Heidi provider. Meaningful work, real earnings, clear boundaries.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- GOOGLE SHEETS: Add a new tab called "Provider Applications" with these headers:
+  Timestamp | Full Name | Email | Phone | DOB | Borough | Gender | Referral |
+  Provider Type | Nursing School | Graduation Year | Statement Why |
+  Statement Experience | Criminal History | Policy Agreed | BG Consented | Terms Agreed
+  -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-primary: #5C2D5C;
+      --color-primary-dark: #3D1A3D;
+      --color-primary-mid: #8B5A8B;
+      --color-primary-light: #F5EDF5;
+      --color-primary-border: #D4B8D4;
+      --color-bg: #FBF7F2;
+      --color-surface: #F4EDE3;
+      --color-text: #2A1F2A;
+      --color-text-muted: #6B5A6B;
+      --color-border: #E8DDD0;
+      --color-success: #10b981;
+      --color-warning: #D4A574;
+      --color-accent: #D4A574;
+      --color-error: #ef4444;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --radius-card: 16px;
+      --radius-input: 10px;
+      --radius-pill: 999px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
+
+    /* ── NAV ── */
+    nav { position: sticky; top: 0; z-index: 100; background: var(--color-surface); box-shadow: 0 1px 12px rgba(0,0,0,0.07); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--color-primary); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; flex-shrink: 0; }
+    .logo svg { width: 28px; height: 28px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--color-text); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--color-primary); }
+    .btn-nav { background: var(--color-primary); color: #fff !important; padding: 9px 20px; border-radius: 50px; font-weight: 600; transition: background 0.2s !important; white-space: nowrap; }
+    .btn-nav:hover { background: var(--color-primary-dark) !important; color: #fff !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: var(--color-surface); padding: 20px 24px; gap: 16px; box-shadow: 0 8px 16px rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: sticky;
+      top: 68px;
+      z-index: 90;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      padding: 14px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #progress-label { font-size: 12px; font-weight: 500; color: var(--color-text); }
+    #progress-track {
+      width: 180px;
+      height: 4px;
+      border-radius: var(--radius-pill);
+      background: var(--color-border);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    #progress-fill {
+      height: 100%;
+      border-radius: var(--radius-pill);
+      background: var(--color-primary);
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    @media (max-width: 640px) {
+      #progress-bar { padding: 12px 20px; }
+      #progress-track { width: 100px; }
+    }
+
+    /* ── INTRO SECTION ── */
+    #intro-state {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 72px 52px 56px;
+      background: var(--color-surface);
+    }
+    @media (max-width: 768px) { #intro-state { padding: 48px 24px 40px; } }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+    }
+    .eyebrow-rule { display: block; width: 28px; height: 1.5px; background: var(--color-primary); flex-shrink: 0; }
+
+    .intro-headline {
+      font-family: var(--font-heading);
+      font-size: 46px;
+      font-weight: 300;
+      line-height: 1.18;
+      color: var(--color-text);
+      margin-bottom: 24px;
+      white-space: pre-line;
+    }
+    @media (max-width: 640px) { .intro-headline { font-size: 32px; } }
+
+    .intro-body {
+      font-size: 15px;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+      max-width: 500px;
+      margin-bottom: 36px;
+    }
+
+    /* Stat cards */
+    .stat-row { display: flex; gap: 16px; margin-bottom: 32px; }
+    .stat-card {
+      flex: 1;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-value { font-family: var(--font-heading); font-size: 36px; font-weight: 300; color: var(--color-text); line-height: 1.1; }
+    .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); margin-top: 6px; }
+    @media (max-width: 480px) { .stat-row { flex-direction: column; } }
+
+    /* Requirement pills */
+    .req-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+    .req-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 6px 14px;
+      font-size: 12px;
+      color: var(--color-primary);
+    }
+
+    /* Primary button */
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-block;
+      text-decoration: none;
+      min-height: 44px;
+    }
+    .btn-primary:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
+    .btn-primary:disabled,
+    .btn-primary[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-caption { font-size: 12px; color: var(--color-text-muted); text-align: center; margin-top: 12px; }
+
+    /* ── FORM CONTAINER ── */
+    #form-state { background: var(--color-bg); }
+    #form-container {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 52px 32px 100px;
+    }
+    @media (max-width: 640px) { #form-container { padding: 32px 20px 80px; } }
+
+    .step { display: none; }
+    .step.active { display: block; }
+
+    /* Step headline */
+    .step-headline {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--color-text);
+      margin-bottom: 8px;
+    }
+    .step-headline.lg { font-size: 32px; }
+    .step-headline.md { font-size: 28px; }
+    @media (max-width: 480px) { .step-headline.lg { font-size: 26px; } .step-headline.md { font-size: 22px; } }
+
+    .step-caption { font-size: 13px; color: var(--color-text-muted); margin-bottom: 32px; line-height: 1.6; }
+    .step-body { font-size: 15px; color: var(--color-text-muted); line-height: 1.75; margin-bottom: 28px; }
+
+    /* Requirements list */
+    .req-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .req-item { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--color-text); }
+    .req-icon { flex-shrink: 0; margin-top: 1px; }
+
+    /* Earnings panel */
+    .earnings-panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 20px 24px;
+      margin-top: 28px;
+      margin-bottom: 32px;
+    }
+    .earnings-eyebrow { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-primary); margin-bottom: 14px; font-weight: 600; }
+    .earnings-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; font-size: 13px; }
+    .earnings-row + .earnings-row { border-top: 0.5px solid var(--color-border); }
+    .earnings-row span:first-child { color: var(--color-text); }
+    .earnings-row span:last-child { color: var(--color-text-muted); font-weight: 500; }
+    .earnings-note { font-size: 11px; color: var(--color-text-muted); margin-top: 12px; }
+
+    /* Form fields */
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 6px;
+    }
+    .field label .req { color: var(--color-primary); margin-left: 2px; }
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-input);
+      font-family: var(--font-body);
+      font-size: 0.93rem;
+      color: var(--color-text);
+      background: var(--color-surface);
+      transition: border-color 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+      min-height: 44px;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(92,45,92,0.1); }
+    .field textarea { resize: vertical; min-height: 160px; min-height: 44px; }
+    .field select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; background-color: var(--color-surface); }
+    .field input.error, .field select.error, .field textarea.error { border-color: var(--color-error); }
+    .field-error { color: var(--color-error); font-size: 12px; margin-top: 5px; display: none; }
+    .field-error.visible { display: block; }
+    .field-helper { font-size: 11px; color: var(--color-text-muted); font-style: italic; margin-top: 5px; }
+
+    /* Provider type cards */
+    .type-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      margin-bottom: 16px;
+      user-select: none;
+    }
+    .type-card:hover { border-color: var(--color-primary); }
+    .type-card.selected { border-color: var(--color-primary); background: rgba(92,45,92,0.06); }
+    .type-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .radio-circle {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid var(--color-border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .type-card.selected .radio-circle { border-color: var(--color-primary); background: var(--color-primary); }
+    .radio-dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; display: none; }
+    .type-card.selected .radio-dot { display: block; }
+    .type-card-title { font-size: 15px; font-weight: 500; color: var(--color-text); }
+    .type-card-body { font-size: 13px; color: var(--color-text-muted); line-height: 1.65; }
+    .type-services { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+    .type-service { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--color-text); }
+    .service-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--color-primary); flex-shrink: 0; margin-top: 6px; }
+    .type-rate { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--color-border); display: flex; align-items: baseline; gap: 4px; }
+    .rate-value { font-family: var(--font-heading); font-size: 18px; color: var(--color-text); }
+    .rate-unit { font-size: 13px; color: var(--color-text-muted); }
+
+    .sc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(92,45,92,0.08);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      padding: 3px 10px;
+      font-size: 10px;
+      color: var(--color-primary);
+      font-weight: 600;
+      margin-left: auto;
+    }
+
+    /* Conditional SC fields */
+    #sc-fields {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    #sc-fields.open { max-height: 300px; }
+
+    /* Personal statement */
+    .word-count {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-top: 6px;
+      transition: color 0.2s;
+    }
+    .word-count.met { color: var(--color-primary); }
+    .word-count.over { color: var(--color-error); }
+
+    .statement-note {
+      background: var(--color-surface);
+      border-left: 3px solid var(--color-border);
+      padding: 12px 16px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+
+    /* Final checks — radio option cards */
+    .question-label { font-size: 13px; font-weight: 500; color: var(--color-text); margin-bottom: 12px; line-height: 1.5; }
+    .option-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 16px 20px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 44px;
+      user-select: none;
+    }
+    .option-card:hover { border-color: var(--color-primary); }
+    .option-card.selected { border-color: var(--color-primary); background: rgba(92,45,92,0.06); }
+    .option-card.selected .radio-circle { border-color: var(--color-primary); background: var(--color-primary); }
+    .option-card.selected .radio-dot { display: block; }
+    .option-label { font-size: 14px; font-weight: 500; color: var(--color-text); }
+
+    /* Disqualification panel */
+    #disqualify-panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      margin-top: 20px;
+      display: none;
+    }
+    #disqualify-panel.visible { display: block; }
+    #disqualify-panel h3 { font-family: var(--font-heading); font-size: 20px; font-weight: 300; margin-bottom: 14px; color: var(--color-text); }
+    #disqualify-panel p { font-size: 14px; color: var(--color-text-muted); line-height: 1.75; }
+    #disqualify-panel a { color: var(--color-primary); }
+
+    /* Checkbox cards */
+    .checkbox-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 18px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      cursor: pointer;
+      margin-bottom: 12px;
+      min-height: 44px;
+      user-select: none;
+      transition: border-color 0.15s;
+    }
+    .checkbox-card:hover { border-color: var(--color-primary); }
+    .checkbox-card input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+    .checkbox-card-content {}
+    .checkbox-card-label { font-size: 13px; font-weight: 500; color: var(--color-text); margin-bottom: 4px; }
+    .checkbox-card-body { font-size: 12px; color: var(--color-text-muted); line-height: 1.6; }
+    .checkbox-card-label a { color: var(--color-primary); }
+    .checkbox-card-label a:hover { text-decoration: underline; }
+
+    /* Review step */
+    .review-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .review-section { padding: 16px 0; border-bottom: 1px solid var(--color-border); }
+    .review-section:first-child { padding-top: 0; }
+    .review-section:last-child { border-bottom: none; padding-bottom: 0; }
+    .review-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .review-section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); font-weight: 600; }
+    .review-edit { font-size: 11px; color: var(--color-primary); cursor: pointer; text-decoration: none; }
+    .review-edit:hover { text-decoration: underline; }
+    .review-row { font-size: 13px; color: var(--color-text); margin-bottom: 5px; display: flex; gap: 8px; }
+    .review-row-label { color: var(--color-text-muted); flex-shrink: 0; }
+    .review-check { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--color-text); margin-bottom: 6px; }
+
+    /* Step nav */
+    .step-nav { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .btn-back {
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .btn-back:hover { color: var(--color-primary); }
+
+    .btn-full { width: 100%; }
+
+    .submit-note { font-size: 12px; color: var(--color-text-muted); text-align: center; margin-top: 10px; line-height: 1.5; }
+    .submit-error { font-size: 13px; color: var(--color-text-muted); margin-top: 10px; display: none; }
+    .submit-error.visible { display: block; }
+    .submit-error a { color: var(--color-primary); }
+
+    /* ── SUCCESS STATE ── */
+    #success-state { display: none; }
+    .success-inner {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 72px 32px 80px;
+    }
+    @media (max-width: 640px) { .success-inner { padding: 48px 20px 60px; } }
+
+    .success-check-wrap { display: flex; justify-content: center; margin-bottom: 24px; }
+    .success-check-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(92,45,92,0.08);
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-headline { font-family: var(--font-heading); font-size: 36px; font-weight: 300; color: var(--color-text); margin-bottom: 16px; text-align: center; }
+    .success-body { font-size: 15px; color: var(--color-text-muted); line-height: 1.8; max-width: 480px; margin: 0 auto 40px; text-align: center; }
+
+    .success-timeline { margin-top: 40px; }
+    .timeline-step { display: flex; gap: 16px; padding-bottom: 28px; position: relative; }
+    .timeline-step:last-child { padding-bottom: 0; }
+    .timeline-left { flex-shrink: 0; position: relative; display: flex; flex-direction: column; align-items: center; }
+    .timeline-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .timeline-connector {
+      width: 1px;
+      background: var(--color-border);
+      flex: 1;
+      margin-top: 4px;
+    }
+    .timeline-step:last-child .timeline-connector { display: none; }
+    .timeline-right { padding-top: 6px; }
+    .timeline-title { font-size: 14px; font-weight: 500; color: var(--color-text); margin-bottom: 4px; }
+    .timeline-desc { font-size: 13px; color: var(--color-text-muted); line-height: 1.65; }
+
+    .success-contact { font-size: 12px; color: var(--color-text-muted); text-align: center; margin-top: 32px; }
+    .success-contact a { color: var(--color-primary); }
+
+    /* ── FOOTER ── */
+    footer { background: #2A1F2A; color: rgba(255,255,255,0.85); padding: 56px 24px 32px; }
+    .footer-inner { max-width: 1060px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand .logo { color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 0.88rem; color: rgba(255,255,255,0.55); max-width: 260px; line-height: 1.6; }
+    .footer-links h4 { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 14px; }
+    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .footer-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+    .footer-disclaimer { background: rgba(92,45,92,0.15); border: 1px solid rgba(92,45,92,0.3); border-radius: 8px; padding: 12px 16px; font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .footer-copy { font-size: 0.82rem; color: rgba(255,255,255,0.4); }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="index.html">Heidi</a>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <rect y="4" width="22" height="2" rx="1" fill="#2A1F2A"/>
+        <rect y="10" width="22" height="2" rx="1" fill="#2A1F2A"/>
+        <rect y="16" width="22" height="2" rx="1" fill="#2A1F2A"/>
+      </svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="safety.html">Safety</a></li>
+      <li><a href="apply.html">Become a provider</a></li>
+      <li><a href="index.html#client-form" class="btn-nav">Join the Waitlist</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── PROGRESS BAR (hidden until form begins) ── -->
+<div id="progress-bar" style="display:none" aria-hidden="true">
+  <span id="progress-label">Step 1 of 6 — Why Heidi</span>
+  <div id="progress-track">
+    <div id="progress-fill"
+         role="progressbar"
+         aria-valuenow="1"
+         aria-valuemin="1"
+         aria-valuemax="6"
+         aria-label="Application progress"></div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <!-- ════════════════════════════════
+       STATE 1 — INTRO
+  ════════════════════════════════ -->
+  <div id="intro-state">
+    <div class="eyebrow">
+      <span class="eyebrow-rule" aria-hidden="true"></span>
+      Become a provider
+    </div>
+
+    <h1 class="intro-headline">Meaningful work.
+Real earnings.
+Clear boundaries.</h1>
+
+    <p class="intro-body">
+      Heidi providers earn $75–150 per session supporting womxn and LGBTQIA+ clients through emotional presence, medical accompaniment, and practical companionship. Every provider is personally vetted, trained, and backed by a strong safety framework.<br><br>
+      No upfront fees. No certification required. Just a genuine desire to show up for people in hard moments.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-value">$75–150</div>
+        <div class="stat-label">per session</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">~2 hrs</div>
+        <div class="stat-label">orientation</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">$0</div>
+        <div class="stat-label">to apply</div>
+      </div>
+    </div>
+
+    <div class="req-pills">
+      <div class="req-pill">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <polyline points="2,6 5,9 10,3" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        21 or older
+      </div>
+      <div class="req-pill">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <polyline points="2,6 5,9 10,3" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        Background check required
+      </div>
+      <div class="req-pill">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <polyline points="2,6 5,9 10,3" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        Video interview required
+      </div>
+      <div class="req-pill">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <polyline points="2,6 5,9 10,3" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        Nonsexual services only
+      </div>
+    </div>
+
+    <button class="btn-primary" id="intro-cta" onclick="startApplication()">Start my application →</button>
+    <p class="btn-caption">Applications are reviewed individually. We read every word.</p>
+  </div>
+
+  <!-- ════════════════════════════════
+       STATE 2 — FORM
+  ════════════════════════════════ -->
+  <div id="form-state" style="display:none">
+    <div id="form-container">
+
+      <!-- ── STEP 1 — Why Heidi ── -->
+      <div id="step-1" class="step active" role="region" aria-labelledby="step1-headline">
+        <h2 id="step1-headline" class="step-headline lg" tabindex="-1">Become a Heidi provider</h2>
+        <p class="step-body">
+          We're looking for emotionally intelligent, boundaried people who want to do meaningful work. Applications are reviewed individually — this is not a gig platform.
+        </p>
+
+        <ul class="req-list">
+          <li class="req-item">
+            <svg class="req-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <polyline points="3,8 6.5,11.5 13,4.5" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            21 or older
+          </li>
+          <li class="req-item">
+            <svg class="req-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <polyline points="3,8 6.5,11.5 13,4.5" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            Background check required — we cover the cost
+          </li>
+          <li class="req-item">
+            <svg class="req-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <polyline points="3,8 6.5,11.5 13,4.5" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            Video interview required before listing goes live
+          </li>
+          <li class="req-item">
+            <svg class="req-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <polyline points="3,8 6.5,11.5 13,4.5" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            Nonsexual services only — no exceptions, ever
+          </li>
+        </ul>
+
+        <div class="earnings-panel">
+          <p class="earnings-eyebrow">What providers earn</p>
+          <div class="earnings-row">
+            <span>Standard sessions</span>
+            <span>$75–85 / hour</span>
+          </div>
+          <div class="earnings-row">
+            <span>Steady Companion</span>
+            <span>$129–150 / hour</span>
+          </div>
+          <div class="earnings-row">
+            <span>Your take</span>
+            <span>82% of every session</span>
+          </div>
+          <p class="earnings-note">Payouts processed within 5 business days of session completion.</p>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-primary btn-full" onclick="goToStep(2)">Start my application →</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 2 — Basic Information ── -->
+      <div id="step-2" class="step" role="region" aria-labelledby="step2-headline">
+        <h2 id="step2-headline" class="step-headline md" tabindex="-1">Tell us about yourself</h2>
+        <p class="step-caption">Used for identity verification and background screening. All fields are required unless marked optional.</p>
+
+        <div class="field">
+          <label for="full-name">Full legal name<span class="req" aria-label="required">*</span></label>
+          <input type="text" id="full-name" name="full_name" placeholder="As it appears on your government ID" autocomplete="name" required aria-describedby="full-name-helper full-name-err">
+          <p class="field-helper" id="full-name-helper">Will be verified against your ID during the background check.</p>
+          <p class="field-error" id="full-name-err" role="alert">Please enter your full legal name.</p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email address<span class="req" aria-label="required">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-err">
+          <p class="field-error" id="email-err" role="alert">Please enter a valid email address.</p>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone number<span class="req" aria-label="required">*</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="(212) 555-0100" autocomplete="tel" required aria-describedby="phone-helper phone-err">
+          <p class="field-helper" id="phone-helper">Used for safety check-ins during active sessions.</p>
+          <p class="field-error" id="phone-err" role="alert">Please enter your phone number.</p>
+        </div>
+
+        <div class="field">
+          <label for="dob">Date of birth<span class="req" aria-label="required">*</span></label>
+          <input type="date" id="dob" name="dob" required aria-describedby="dob-err">
+          <p class="field-error" id="dob-err" role="alert">Heidi providers must be 21 or older. Unfortunately we can't move forward with your application.</p>
+        </div>
+
+        <div class="field">
+          <label for="borough">Where are you based?<span class="req" aria-label="required">*</span></label>
+          <select id="borough" name="borough" required aria-describedby="borough-err">
+            <option value="">Select a borough</option>
+            <option value="Manhattan">Manhattan</option>
+            <option value="Brooklyn">Brooklyn</option>
+            <option value="Queens">Queens</option>
+            <option value="Bronx">Bronx</option>
+            <option value="Staten Island">Staten Island</option>
+            <option value="Other NYC area">Other NYC area</option>
+          </select>
+          <p class="field-error" id="borough-err" role="alert">Please select your location.</p>
+        </div>
+
+        <div class="field">
+          <label for="gender">Gender identity <em style="font-style:normal;font-weight:400;color:var(--color-text-muted)">(optional)</em></label>
+          <select id="gender" name="gender" aria-describedby="gender-helper">
+            <option value="Prefer not to say">Prefer not to say</option>
+            <option value="Man (cisgender)">Man (cisgender)</option>
+            <option value="Man (transgender)">Man (transgender)</option>
+            <option value="Woman (cisgender)">Woman (cisgender)</option>
+            <option value="Woman (transgender)">Woman (transgender)</option>
+            <option value="Non-binary / gender non-conforming">Non-binary / gender non-conforming</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="field-helper" id="gender-helper">Helps us match providers to clients with specific preferences. Never required.</p>
+        </div>
+
+        <div class="field">
+          <label for="referral">How did you hear about us? <em style="font-style:normal;font-weight:400;color:var(--color-text-muted)">(optional)</em></label>
+          <select id="referral" name="referral">
+            <option value="">Select one</option>
+            <option value="Instagram or TikTok">Instagram or TikTok</option>
+            <option value="Friend or colleague">Friend or colleague</option>
+            <option value="Therapist or counselor">Therapist or counselor</option>
+            <option value="Social work or nursing program">Social work or nursing program</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="Google search">Google search</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-primary btn-full" onclick="validateStep2()">Continue →</button>
+          <button class="btn-back" onclick="goToStep(1)">← Back</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 3 — Provider Type ── -->
+      <div id="step-3" class="step" role="region" aria-labelledby="step3-headline">
+        <h2 id="step3-headline" class="step-headline md" tabindex="-1">What kind of support do you offer?</h2>
+        <p class="step-caption">Select one or both if you qualify for Steady Companion.</p>
+
+        <!-- Standard Provider card -->
+        <div class="type-card" id="card-standard" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleType('standard')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleType('standard')}">
+          <div class="type-card-header">
+            <div class="radio-circle" aria-hidden="true"><div class="radio-dot"></div></div>
+            <span class="type-card-title">Standard Provider</span>
+          </div>
+          <p class="type-card-body">Emotional support, companionship, medical accompaniment, and activity-based sessions. No specific credentials required.</p>
+          <div class="type-services">
+            <div class="type-service"><div class="service-dot" aria-hidden="true"></div>Emotional presence &amp; listening</div>
+            <div class="type-service"><div class="service-dot" aria-hidden="true"></div>Medical appointment accompaniment</div>
+            <div class="type-service"><div class="service-dot" aria-hidden="true"></div>Public companionship (walks, errands)</div>
+            <div class="type-service"><div class="service-dot" aria-hidden="true"></div>Platonic touch (hand-holding, seated closeness)</div>
+          </div>
+          <div class="type-rate">
+            <span class="rate-value">$75–85</span>
+            <span class="rate-unit">/ hour</span>
+          </div>
+        </div>
+
+        <!-- Steady Companion card -->
+        <div class="type-card" id="card-sc" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleType('sc')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleType('sc')}">
+          <div class="type-card-header">
+            <div class="radio-circle" aria-hidden="true"><div class="radio-dot"></div></div>
+            <span class="type-card-title">Steady Companion</span>
+            <span class="sc-badge" aria-label="Steady Companion badge">✦ Steady Companion</span>
+          </div>
+          <p class="type-card-body">Medical visit accompaniment for clients facing procedures, diagnoses, or stressful appointments. Requires current enrollment in an accredited nursing program.</p>
+          <div class="type-services">
+            <div class="type-service"><div class="service-dot" aria-hidden="true"></div>Medical &amp; procedure accompaniment</div>
+            <div class="type-service"><div class="service-dot" aria-hidden="true"></div>Appointment chaperone</div>
+            <div class="type-service"><div class="service-dot" aria-hidden="true"></div>Calm presence during diagnoses or procedures</div>
+          </div>
+          <div class="type-rate">
+            <span class="rate-value">$129–150</span>
+            <span class="rate-unit">/ hour</span>
+          </div>
+        </div>
+
+        <!-- Conditional SC fields -->
+        <div id="sc-fields" aria-hidden="true">
+          <div style="padding-top: 4px;">
+            <div class="field">
+              <label for="nursing-school">Nursing school name<span class="req" aria-label="required">*</span></label>
+              <input type="text" id="nursing-school" name="nursing_school" placeholder="e.g. NYU Rory Meyers College of Nursing" aria-describedby="sc-helper sc-school-err">
+              <p class="field-error" id="sc-school-err" role="alert">Please enter your nursing school name.</p>
+            </div>
+            <div class="field">
+              <label for="grad-year">Expected graduation year<span class="req" aria-label="required">*</span></label>
+              <select id="grad-year" name="graduation_year" aria-describedby="sc-helper sc-year-err">
+                <option value="">Select year</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+              </select>
+              <p class="field-error" id="sc-year-err" role="alert">Please select your graduation year.</p>
+            </div>
+            <p class="field-helper" id="sc-helper">Enrollment is verified during the background check step. Your Steady Companion badge appears on your profile once confirmed.</p>
+          </div>
+        </div>
+
+        <p class="field-error" id="type-err" role="alert">Please select at least one provider type to continue.</p>
+
+        <div class="step-nav">
+          <button class="btn-primary btn-full" onclick="validateStep3()">Continue →</button>
+          <button class="btn-back" onclick="goToStep(2)">← Back</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 4 — Personal Statement ── -->
+      <div id="step-4" class="step" role="region" aria-labelledby="step4-headline">
+        <h2 id="step4-headline" class="step-headline md" tabindex="-1">In your own words</h2>
+        <p class="step-body">
+          This is the most important part of your application. We read every word. Take your time.
+        </p>
+
+        <div class="field">
+          <label for="stmt-why">Why do you want to be a Heidi provider?<span class="req" aria-label="required">*</span></label>
+          <textarea id="stmt-why" name="statement_why" rows="8" placeholder="What draws you to this kind of work? What do you understand about holding space for someone in a hard moment?" required aria-describedby="wc-why stmt-why-err"></textarea>
+          <p class="word-count" id="wc-why" aria-live="polite">0 / 500 words</p>
+          <p class="field-error" id="stmt-why-err" role="alert">Please write at least 100 words.</p>
+        </div>
+
+        <div class="field">
+          <label for="stmt-exp">Describe a time you supported someone through a difficult moment.<span class="req" aria-label="required">*</span></label>
+          <textarea id="stmt-exp" name="statement_experience" rows="8" placeholder="This can be personal or professional. We're looking for emotional intelligence, not formal credentials." required aria-describedby="wc-exp stmt-exp-err"></textarea>
+          <p class="word-count" id="wc-exp" aria-live="polite">0 / 500 words</p>
+          <p class="field-error" id="stmt-exp-err" role="alert">Please write at least 100 words.</p>
+        </div>
+
+        <div class="statement-note">
+          Your answers are read by our founder, not filtered by an algorithm. Applications that feel transactional, minimize the nonsexual policy, or seem focused on provider benefit rather than client wellbeing will not advance.
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-primary btn-full" id="stmt-continue" aria-disabled="true" title="Please complete both responses — 100 words minimum each" onclick="validateStep4()">Continue →</button>
+          <button class="btn-back" onclick="goToStep(3)">← Back</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 5 — Final Checks ── -->
+      <div id="step-5" class="step" role="region" aria-labelledby="step5-headline">
+        <h2 id="step5-headline" class="step-headline md" tabindex="-1">A few important questions</h2>
+        <p class="step-caption">Required. Please answer honestly.</p>
+
+        <!-- Q1: Criminal history -->
+        <div style="margin-bottom: 28px;">
+          <p class="question-label">Have you ever been convicted of a felony or sex offense?</p>
+
+          <div class="option-card" id="criminal-no" role="radio" aria-checked="false" tabindex="0"
+               onclick="selectCriminal('no')"
+               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectCriminal('no')}">
+            <div class="radio-circle" aria-hidden="true"><div class="radio-dot"></div></div>
+            <span class="option-label">No</span>
+          </div>
+
+          <div class="option-card" id="criminal-yes" role="radio" aria-checked="false" tabindex="0"
+               onclick="selectCriminal('yes')"
+               onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectCriminal('yes')}">
+            <div class="radio-circle" aria-hidden="true"><div class="radio-dot"></div></div>
+            <span class="option-label">Yes</span>
+          </div>
+
+          <p class="field-error" id="criminal-err" role="alert">Please answer this question to continue.</p>
+
+          <div id="disqualify-panel" aria-live="polite">
+            <h3>Thank you for your honesty.</h3>
+            <p>
+              Unfortunately, Heidi is unable to move forward with applications from individuals with felony or sex offense convictions. This is a firm requirement of our safety framework — not a reflection of your character or worth as a person.<br><br>
+              If you believe this applies to you in error, please reach out to us directly at <a href="mailto:providers@pleaseheidi.com">providers@pleaseheidi.com</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Questions 2–4 (hidden when disqualified) -->
+        <div id="step5-checks">
+          <!-- Q2: Nonsexual policy -->
+          <label class="checkbox-card" for="check-nonsexual" style="display:flex">
+            <input type="checkbox" id="check-nonsexual" name="nonsexual_policy" aria-describedby="check-nonsexual-err" onchange="updateStep5Btn()">
+            <div class="checkbox-card-content">
+              <p class="checkbox-card-label">I understand and fully commit to Heidi's nonsexual services policy.</p>
+              <p class="checkbox-card-body">All sessions are strictly nonsexual. Any romantic, sexual, or intimate conduct of any kind results in immediate and permanent removal from the platform — no exceptions and no appeals.</p>
+            </div>
+          </label>
+
+          <!-- Q3: Background check -->
+          <label class="checkbox-card" for="check-bgcheck" style="display:flex">
+            <input type="checkbox" id="check-bgcheck" name="bg_check" aria-describedby="check-bgcheck-err" onchange="updateStep5Btn()">
+            <div class="checkbox-card-content">
+              <p class="checkbox-card-label">I consent to a criminal background check and sex offender registry screening as a condition of my application.</p>
+              <p class="checkbox-card-body">Heidi covers the cost. Results are reviewed by our team and are not shared with clients. Certain convictions result in automatic and permanent disqualification.</p>
+            </div>
+          </label>
+
+          <!-- Q4: Terms -->
+          <label class="checkbox-card" for="check-terms" style="display:flex">
+            <input type="checkbox" id="check-terms" name="terms" aria-describedby="check-terms-err" onchange="updateStep5Btn()">
+            <div class="checkbox-card-content">
+              <p class="checkbox-card-label">I agree to Heidi's
+                <a href="legal/terms.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">Terms of Use</a>,
+                <a href="legal/privacy.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">Privacy Policy</a>,
+                and <a href="legal/conduct.html" target="_blank" rel="noopener" onclick="event.stopPropagation()">Code of Conduct</a>.</p>
+            </div>
+          </label>
+
+          <p class="field-error" id="checks-err" role="alert">Please complete all required agreements to continue.</p>
+        </div>
+
+        <div id="step5-nav" class="step-nav">
+          <button class="btn-primary btn-full" id="step5-continue" aria-disabled="true" onclick="validateStep5()">Continue →</button>
+          <button class="btn-back" onclick="goToStep(4)">← Back</button>
+        </div>
+      </div>
+
+      <!-- ── STEP 6 — Review & Submit ── -->
+      <div id="step-6" class="step" role="region" aria-labelledby="step6-headline">
+        <h2 id="step6-headline" class="step-headline md" tabindex="-1">Review your application</h2>
+        <p class="step-caption">Please confirm everything looks right before submitting.</p>
+
+        <div class="review-card">
+
+          <div class="review-section">
+            <div class="review-section-header">
+              <span class="review-section-label">About you</span>
+              <a class="review-edit" role="button" tabindex="0" onclick="goToStep(2)" onkeydown="if(event.key==='Enter')goToStep(2)">Edit →</a>
+            </div>
+            <div id="review-name" class="review-row"><span class="review-row-label">Name</span><span id="rv-name"></span></div>
+            <div id="review-email" class="review-row"><span class="review-row-label">Email</span><span id="rv-email"></span></div>
+            <div id="review-phone" class="review-row"><span class="review-row-label">Phone</span><span id="rv-phone"></span></div>
+            <div id="review-dob" class="review-row"><span class="review-row-label">Date of birth</span><span id="rv-dob"></span></div>
+            <div id="review-borough" class="review-row"><span class="review-row-label">Location</span><span id="rv-borough"></span></div>
+            <div id="review-gender" class="review-row"><span class="review-row-label">Gender</span><span id="rv-gender"></span></div>
+          </div>
+
+          <div class="review-section">
+            <div class="review-section-header">
+              <span class="review-section-label">Provider type</span>
+              <a class="review-edit" role="button" tabindex="0" onclick="goToStep(3)" onkeydown="if(event.key==='Enter')goToStep(3)">Edit →</a>
+            </div>
+            <div id="rv-type-wrap"></div>
+          </div>
+
+          <div class="review-section">
+            <div class="review-section-header">
+              <span class="review-section-label">Personal statement</span>
+              <a class="review-edit" role="button" tabindex="0" onclick="goToStep(4)" onkeydown="if(event.key==='Enter')goToStep(4)">Edit →</a>
+            </div>
+            <div class="review-row" style="flex-direction:column; gap:6px;">
+              <span class="review-row-label">Why Heidi</span>
+              <span id="rv-why" style="font-size:13px;color:var(--color-text);line-height:1.5;"></span>
+            </div>
+            <div class="review-row" style="flex-direction:column; gap:6px; margin-top:10px;">
+              <span class="review-row-label">Your experience</span>
+              <span id="rv-exp" style="font-size:13px;color:var(--color-text);line-height:1.5;"></span>
+            </div>
+          </div>
+
+          <div class="review-section">
+            <div class="review-section-header">
+              <span class="review-section-label">Confirmations</span>
+              <a class="review-edit" role="button" tabindex="0" onclick="goToStep(5)" onkeydown="if(event.key==='Enter')goToStep(5)">Edit →</a>
+            </div>
+            <div class="review-check">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><polyline points="2,7 6,11 12,3" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              Criminal history: No convictions disclosed
+            </div>
+            <div class="review-check">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><polyline points="2,7 6,11 12,3" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              Nonsexual policy: Acknowledged
+            </div>
+            <div class="review-check">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><polyline points="2,7 6,11 12,3" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              Background check: Consented
+            </div>
+            <div class="review-check">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><polyline points="2,7 6,11 12,3" stroke="var(--color-primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+              Terms: Agreed
+            </div>
+          </div>
+
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-primary btn-full" id="submit-btn" onclick="submitApplication()">Submit my application →</button>
+          <p class="submit-note">By submitting, you confirm all information above is accurate. Providing false information results in immediate disqualification.</p>
+          <p class="submit-error" id="submit-err">
+            Something went wrong. Please try again, or email us directly at <a href="mailto:providers@pleaseheidi.com">providers@pleaseheidi.com</a>
+          </p>
+          <button class="btn-back" onclick="goToStep(5)">← Back</button>
+        </div>
+      </div>
+
+    </div><!-- /form-container -->
+  </div><!-- /form-state -->
+
+  <!-- ════════════════════════════════
+       STATE 3 — SUCCESS
+  ════════════════════════════════ -->
+  <div id="success-state">
+    <div class="success-inner">
+      <div class="success-check-wrap">
+        <div class="success-check-circle">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <polyline points="5,14 11,20 23,8" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+      </div>
+
+      <h2 class="success-headline">Application received.</h2>
+      <p class="success-body">Thank you, <span id="success-name"></span>. We review every application personally and will be in touch within 1–2 business days.</p>
+
+      <div class="success-timeline">
+
+        <div class="timeline-step">
+          <div class="timeline-left">
+            <div class="timeline-num">1</div>
+            <div class="timeline-connector"></div>
+          </div>
+          <div class="timeline-right">
+            <p class="timeline-title">Email confirmation</p>
+            <p class="timeline-desc">A summary of your application is on its way to <span id="success-email"></span>.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-left">
+            <div class="timeline-num">2</div>
+            <div class="timeline-connector"></div>
+          </div>
+          <div class="timeline-right">
+            <p class="timeline-title">Identity verification</p>
+            <p class="timeline-desc">We'll reach out within 48 hours to verify your government ID through our secure third-party partner. Takes about 10 minutes.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-left">
+            <div class="timeline-num">3</div>
+            <div class="timeline-connector"></div>
+          </div>
+          <div class="timeline-right">
+            <p class="timeline-title">Background check</p>
+            <p class="timeline-desc">A comprehensive criminal history and sex offender registry screening. Timeline: 3–5 business days. We cover the cost.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-left">
+            <div class="timeline-num">4</div>
+            <div class="timeline-connector"></div>
+          </div>
+          <div class="timeline-right">
+            <p class="timeline-title">Video interview</p>
+            <p class="timeline-desc">If your application and background check clear, we'll schedule a 30-minute video call to meet you and walk through our policies.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step">
+          <div class="timeline-left">
+            <div class="timeline-num">5</div>
+            <div class="timeline-connector"></div>
+          </div>
+          <div class="timeline-right">
+            <p class="timeline-title">Profile setup &amp; launch</p>
+            <p class="timeline-desc">Set your rates, availability, and services — then go live. Clients in your area will be able to find and book you.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="success-contact">Questions? Email us at <a href="mailto:providers@pleaseheidi.com">providers@pleaseheidi.com</a></p>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="index.html">Heidi</a>
+        <p>Vetted, compassionate companionship for the moments when you need a human presence, not a prescription.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="safety.html">Safety</a></li>
+          <li><a href="apply.html">Become a provider</a></li>
+          <li><a href="legal/terms.html" target="_blank" rel="noopener">Terms of Use</a></li>
+          <li><a href="legal/privacy.html" target="_blank" rel="noopener">Privacy Policy</a></li>
+          <li><a href="legal/conduct.html" target="_blank" rel="noopener">Code of Conduct</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">Not therapy. Not dating. Not sexual services. Heidi provides peer-style emotional support and companionship only.</div>
+      <p class="footer-copy">© 2025 Heidi. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const PROVIDER_URL = 'https://formspree.io/f/mdawjdjo';
+
+  const STEP_NAMES = ['', 'Why Heidi', 'Basic information', 'Provider type', 'Personal statement', 'Final checks', 'Review & submit'];
+
+  let currentStep = 0;
+  let selectedTypes = { standard: false, sc: false };
+  let criminalAnswer = null; // 'yes' | 'no'
+
+  // ── STATE TRANSITIONS ──
+  function startApplication() {
+    document.getElementById('intro-state').style.display = 'none';
+    document.getElementById('form-state').style.display = 'block';
+    const bar = document.getElementById('progress-bar');
+    bar.style.display = 'flex';
+    bar.removeAttribute('aria-hidden');
+    goToStep(1);
+  }
+
+  function goToStep(n) {
+    // Hide all steps
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    const next = document.getElementById('step-' + n);
+    if (!next) return;
+    next.classList.add('active');
+    currentStep = n;
+    updateProgress(n);
+    window.scrollTo(0, 0);
+    // Focus headline
+    const headline = next.querySelector('[tabindex="-1"]');
+    if (headline) headline.focus();
+
+    if (n === 6) populateReview();
+  }
+
+  function updateProgress(n) {
+    document.getElementById('progress-label').textContent = 'Step ' + n + ' of 6 — ' + STEP_NAMES[n];
+    const fill = document.getElementById('progress-fill');
+    fill.style.width = ((n / 6) * 100) + '%';
+    fill.setAttribute('aria-valuenow', n);
+    const bar = document.getElementById('progress-bar');
+    bar.removeAttribute('aria-hidden');
+  }
+
+  // ── STEP 2 VALIDATION ──
+  function validateStep2() {
+    let valid = true;
+
+    const name = document.getElementById('full-name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const dob = document.getElementById('dob').value;
+    const borough = document.getElementById('borough').value;
+
+    setFieldError('full-name', 'full-name-err', !name);
+    if (!name) valid = false;
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    setFieldError('email', 'email-err', !emailOk);
+    if (!emailOk) valid = false;
+
+    setFieldError('phone', 'phone-err', !phone);
+    if (!phone) valid = false;
+
+    // Age gate
+    if (!dob) {
+      setFieldError('dob', 'dob-err', true);
+      valid = false;
+    } else {
+      const age = calcAge(dob);
+      setFieldError('dob', 'dob-err', age < 21);
+      if (age < 21) valid = false;
+    }
+
+    setFieldError('borough', 'borough-err', !borough);
+    if (!borough) valid = false;
+
+    if (valid) goToStep(3);
+  }
+
+  function calcAge(dobStr) {
+    const today = new Date();
+    const dob = new Date(dobStr);
+    let age = today.getFullYear() - dob.getFullYear();
+    const m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+    return age;
+  }
+
+  // ── STEP 3: PROVIDER TYPE TOGGLES ──
+  function toggleType(type) {
+    if (type === 'standard') {
+      selectedTypes.standard = !selectedTypes.standard;
+      const card = document.getElementById('card-standard');
+      card.classList.toggle('selected', selectedTypes.standard);
+      card.setAttribute('aria-checked', selectedTypes.standard);
+    } else {
+      selectedTypes.sc = !selectedTypes.sc;
+      const card = document.getElementById('card-sc');
+      card.classList.toggle('selected', selectedTypes.sc);
+      card.setAttribute('aria-checked', selectedTypes.sc);
+      const fields = document.getElementById('sc-fields');
+      fields.classList.toggle('open', selectedTypes.sc);
+      fields.setAttribute('aria-hidden', !selectedTypes.sc);
+      // Required attributes on SC inputs
+      document.getElementById('nursing-school').required = selectedTypes.sc;
+      document.getElementById('grad-year').required = selectedTypes.sc;
+    }
+  }
+
+  function validateStep3() {
+    if (!selectedTypes.standard && !selectedTypes.sc) {
+      document.getElementById('type-err').classList.add('visible');
+      return;
+    }
+    document.getElementById('type-err').classList.remove('visible');
+
+    if (selectedTypes.sc) {
+      const school = document.getElementById('nursing-school').value.trim();
+      const year = document.getElementById('grad-year').value;
+      let ok = true;
+      setFieldError('nursing-school', 'sc-school-err', !school);
+      if (!school) ok = false;
+      setFieldError('grad-year', 'sc-year-err', !year);
+      if (!year) ok = false;
+      if (!ok) return;
+    }
+
+    goToStep(4);
+  }
+
+  // ── STEP 4: WORD COUNTERS ──
+  function countWords(str) {
+    return str.trim().split(/\s+/).filter(w => w.length > 0).length;
+  }
+
+  document.getElementById('stmt-why').addEventListener('input', function() {
+    updateWordCount('stmt-why', 'wc-why');
+    checkStep4Ready();
+  });
+  document.getElementById('stmt-exp').addEventListener('input', function() {
+    updateWordCount('stmt-exp', 'wc-exp');
+    checkStep4Ready();
+  });
+
+  function updateWordCount(fieldId, counterId) {
+    const val = document.getElementById(fieldId).value;
+    const count = countWords(val);
+    const el = document.getElementById(counterId);
+    el.textContent = count + ' / 500 words';
+    el.className = 'word-count';
+    if (count >= 100 && count <= 500) el.classList.add('met');
+    else if (count > 500) el.classList.add('over');
+  }
+
+  function checkStep4Ready() {
+    const w1 = countWords(document.getElementById('stmt-why').value);
+    const w2 = countWords(document.getElementById('stmt-exp').value);
+    const btn = document.getElementById('stmt-continue');
+    const ready = w1 >= 100 && w2 >= 100;
+    btn.setAttribute('aria-disabled', !ready);
+    if (ready) {
+      btn.removeAttribute('title');
+    } else {
+      btn.title = 'Please complete both responses — 100 words minimum each';
+    }
+  }
+
+  function validateStep4() {
+    const w1 = countWords(document.getElementById('stmt-why').value);
+    const w2 = countWords(document.getElementById('stmt-exp').value);
+    let valid = true;
+
+    if (w1 < 100) {
+      document.getElementById('stmt-why-err').classList.add('visible');
+      document.getElementById('stmt-why').classList.add('error');
+      valid = false;
+    } else {
+      document.getElementById('stmt-why-err').classList.remove('visible');
+      document.getElementById('stmt-why').classList.remove('error');
+    }
+    if (w1 > 500) {
+      document.getElementById('stmt-why-err').textContent = 'Please stay under 500 words.';
+      document.getElementById('stmt-why-err').classList.add('visible');
+      valid = false;
+    }
+
+    if (w2 < 100) {
+      document.getElementById('stmt-exp-err').classList.add('visible');
+      document.getElementById('stmt-exp').classList.add('error');
+      valid = false;
+    } else {
+      document.getElementById('stmt-exp-err').classList.remove('visible');
+      document.getElementById('stmt-exp').classList.remove('error');
+    }
+    if (w2 > 500) {
+      document.getElementById('stmt-exp-err').textContent = 'Please stay under 500 words.';
+      document.getElementById('stmt-exp-err').classList.add('visible');
+      valid = false;
+    }
+
+    if (valid) goToStep(5);
+  }
+
+  // ── STEP 5: CRIMINAL + CHECKS ──
+  function selectCriminal(answer) {
+    criminalAnswer = answer;
+    const noCard = document.getElementById('criminal-no');
+    const yesCard = document.getElementById('criminal-yes');
+    noCard.classList.toggle('selected', answer === 'no');
+    noCard.setAttribute('aria-checked', answer === 'no');
+    yesCard.classList.toggle('selected', answer === 'yes');
+    yesCard.setAttribute('aria-checked', answer === 'yes');
+    document.getElementById('criminal-err').classList.remove('visible');
+
+    const disqualify = document.getElementById('disqualify-panel');
+    const checks = document.getElementById('step5-checks');
+    const nav = document.getElementById('step5-nav');
+
+    if (answer === 'yes') {
+      disqualify.classList.add('visible');
+      checks.style.display = 'none';
+      nav.style.display = 'none';
+    } else {
+      disqualify.classList.remove('visible');
+      checks.style.display = 'block';
+      nav.style.display = 'flex';
+      updateStep5Btn();
+    }
+  }
+
+  function updateStep5Btn() {
+    const ns = document.getElementById('check-nonsexual').checked;
+    const bg = document.getElementById('check-bgcheck').checked;
+    const tr = document.getElementById('check-terms').checked;
+    const btn = document.getElementById('step5-continue');
+    const ready = criminalAnswer === 'no' && ns && bg && tr;
+    btn.setAttribute('aria-disabled', !ready);
+  }
+
+  function validateStep5() {
+    if (!criminalAnswer) {
+      document.getElementById('criminal-err').classList.add('visible');
+      return;
+    }
+    if (criminalAnswer === 'yes') return;
+
+    const ns = document.getElementById('check-nonsexual').checked;
+    const bg = document.getElementById('check-bgcheck').checked;
+    const tr = document.getElementById('check-terms').checked;
+
+    if (!ns || !bg || !tr) {
+      document.getElementById('checks-err').classList.add('visible');
+      return;
+    }
+    document.getElementById('checks-err').classList.remove('visible');
+    goToStep(6);
+  }
+
+  // ── STEP 6: REVIEW POPULATION ──
+  function populateReview() {
+    document.getElementById('rv-name').textContent = document.getElementById('full-name').value.trim();
+    document.getElementById('rv-email').textContent = document.getElementById('email').value.trim();
+    document.getElementById('rv-phone').textContent = document.getElementById('phone').value.trim();
+    document.getElementById('rv-dob').textContent = document.getElementById('dob').value;
+    document.getElementById('rv-borough').textContent = document.getElementById('borough').value;
+    const gender = document.getElementById('gender').value || 'Not specified';
+    document.getElementById('rv-gender').textContent = gender;
+
+    // Provider type
+    const types = [];
+    if (selectedTypes.standard) types.push('Standard Provider');
+    if (selectedTypes.sc) {
+      const school = document.getElementById('nursing-school').value.trim();
+      const year = document.getElementById('grad-year').value;
+      types.push('Steady Companion — ' + school + ', graduating ' + year);
+    }
+    const typeWrap = document.getElementById('rv-type-wrap');
+    typeWrap.innerHTML = types.map(t => '<div class="review-row"><span>' + escHtml(t) + '</span></div>').join('');
+
+    // Statements (120 char preview)
+    const why = document.getElementById('stmt-why').value.trim();
+    const exp = document.getElementById('stmt-exp').value.trim();
+    document.getElementById('rv-why').textContent = why.slice(0, 120) + (why.length > 120 ? '...' : '') + (why.length > 120 ? ' (read in full above)' : '');
+    document.getElementById('rv-exp').textContent = exp.slice(0, 120) + (exp.length > 120 ? '...' : '');
+  }
+
+  // ── SUBMISSION ──
+  async function submitApplication() {
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+    document.getElementById('submit-err').classList.remove('visible');
+
+    const fullName = document.getElementById('full-name').value.trim();
+    const firstName = fullName.split(' ')[0];
+    const email = document.getElementById('email').value.trim();
+
+    const providerTypes = [];
+    if (selectedTypes.standard) providerTypes.push('standard');
+    if (selectedTypes.sc) providerTypes.push('steady_companion');
+
+    const payload = {
+      type: 'provider_application',
+      first_name: firstName,
+      full_name: fullName,
+      email: email,
+      phone: document.getElementById('phone').value.trim(),
+      dob: document.getElementById('dob').value,
+      borough: document.getElementById('borough').value,
+      gender: document.getElementById('gender').value || '',
+      referral: document.getElementById('referral').value || '',
+      provider_type: providerTypes,
+      nursing_school: document.getElementById('nursing-school').value.trim(),
+      graduation_year: document.getElementById('grad-year').value,
+      statement_why: document.getElementById('stmt-why').value.trim(),
+      statement_experience: document.getElementById('stmt-exp').value.trim(),
+      criminal_history: 'No',
+      nonsexual_policy_agreed: true,
+      background_check_consented: true,
+      terms_agreed: true,
+      submitted_at: new Date().toISOString()
+    };
+
+    try {
+      await fetch(PROVIDER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      showSuccess(firstName, email);
+    } catch (_) {
+      btn.disabled = false;
+      btn.textContent = 'Submit my application →';
+      document.getElementById('submit-err').classList.add('visible');
+    }
+  }
+
+  function showSuccess(firstName, email) {
+    document.getElementById('form-state').style.display = 'none';
+    document.getElementById('progress-bar').style.display = 'none';
+    document.getElementById('progress-bar').setAttribute('aria-hidden', 'true');
+    document.getElementById('success-state').style.display = 'block';
+    document.getElementById('success-name').textContent = firstName;
+    document.getElementById('success-email').textContent = email;
+    window.scrollTo(0, 0);
+  }
+
+  // ── HELPERS ──
+  function setFieldError(inputId, errId, show) {
+    const input = document.getElementById(inputId);
+    const err = document.getElementById(errId);
+    if (show) {
+      input.classList.add('error');
+      err.classList.add('visible');
+    } else {
+      input.classList.remove('error');
+      err.classList.remove('visible');
+    }
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // Initialize step5 checks hidden until criminal "No" selected
+  document.getElementById('step5-checks').style.display = 'none';
+  document.getElementById('step5-nav').style.display = 'none';
+</script>
+
+</body>
+</html>
