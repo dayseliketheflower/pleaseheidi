@@ -87,7 +87,7 @@ function handleProvider(data) {
     + "3. Background Check (3-5 business days)\n"
     + "4. Orientation and Training (~2 hours)\n"
     + "5. Profile Setup and Launch\n\n"
-    + "Questions? providers@pleaseheidi.com\n\n"
+    + "Questions? info@pleaseheidi.com\n\n"
     + "- The Heidi Team\n\n"
     + "Not therapy. Not dating. Not sexual services.";
   GmailApp.sendEmail(data.email, providerSubject, providerBody, {name: "Heidi Provider Team"});
